@@ -17,11 +17,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class UnSplashModule {
+
     @Provides
     @Singleton
     fun providesMyRxBus(): MyRxBus {
         return MyRxBus()
     }
+
     @Provides
     @Singleton
     fun providerRetrofit(): Retrofit {
@@ -31,7 +33,7 @@ class UnSplashModule {
             .baseUrl("https://api.unsplash.com/")
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(HttpLoggingInterceptor().apply { httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS })
+                    .addInterceptor(httpLoggingInterceptor.apply { httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY })
                     .addInterceptor(fun(chain: Interceptor.Chain): Response {
                         return chain.proceed(
                             chain.request()

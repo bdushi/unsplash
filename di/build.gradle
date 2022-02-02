@@ -33,7 +33,7 @@ android {
 dependencies {
     implementation libs.lifecycle
     //Dagger
-    implementation libs.dagger2
+    api libs.dagger2
     kapt libs.dagger2.compiler
     implementation libs.dagger2.android
     implementation libs.dagger2.android.support

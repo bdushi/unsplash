@@ -48,6 +48,14 @@ dependencies {
     implementation libs.google.android.material
     implementation libs.lifecycle
     api project(path: ':unsplash')
+    /**
+     * Dagger
+     */
+    implementation libs.dagger2
+    kapt libs.dagger2.compiler
+    implementation libs.dagger2.android
+    implementation libs.dagger2.android.support
+    kapt libs.dagger2.processor
     // Java 8
     coreLibraryDesugaring libs.desugar.jdk.libs
 

@@ -72,13 +72,18 @@ dependencies {
     implementation libs.swiperefreshlayout
 
     api project(path: ':di')
-    implementation project(path: ':adapter')
+    api project(path: ':adapter')
 
     // Retrofit
-    implementation libs.retrofit
+    api libs.retrofit
     implementation libs.converter.gson
     implementation libs.logging.interceptor
 
+    api libs.dagger2
+    kapt libs.dagger2.compiler
+    implementation libs.dagger2.android
+    implementation libs.dagger2.android.support
+    kapt libs.dagger2.processor
     // RxJava
     implementation libs.rxjava3
     implementation libs.rxjava3.android

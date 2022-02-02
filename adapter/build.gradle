@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
 }
-apply plugin: 'kotlin-android'
+
 android {
     compileSdk 31
     namespace 'al.bruno.adapter'

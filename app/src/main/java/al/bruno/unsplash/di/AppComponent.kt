@@ -16,7 +16,8 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     UnSplashModule::class,
     UnSplashDataSourceModule::class,
-    UnSplashActivityBindingModule::class])
+    UnSplashActivityBindingModule::class,
+    AppBindingBindingModule::class])
 interface AppComponent : AndroidInjector<UnSplashApplication> {
     @Component.Builder
     interface Builder {

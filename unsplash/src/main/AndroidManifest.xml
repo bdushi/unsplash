@@ -1,1 +1,7 @@
-<manifest />
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity android:name="al.bruno.un.splash.ui.search.SearchActivity"/>
+        <activity android:name="al.bruno.un.splash.ui.un.splash.UnSplashActivity"/>
+    </application>
+</manifest>

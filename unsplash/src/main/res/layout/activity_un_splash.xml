@@ -25,4 +25,11 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/un_splash_bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/un_splash_menu"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,32 +2,34 @@ package al.bruno.un.splash.ui.un.splash
 
 import al.bruno.di.base.BaseActivity
 import al.bruno.un.splash.R
+import al.bruno.un.splash.databinding.ActivityUnSplashBinding
 import al.bruno.un.splash.model.api.Search
+import al.bruno.un.splash.ui.search.SearchActivity
 import al.bruno.un.splash.ui.un.splash.collections.CollectionsFragment
 import al.bruno.un.splash.ui.un.splash.home.HomeFragment
 import al.bruno.un.splash.utils.MyRxBus
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class UnSplashActivity : BaseActivity() {
+
+    lateinit var binding: ActivityUnSplashBinding
     @Inject lateinit var myRxBusSearch: MyRxBus
     val search = Search(null, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
-        setContentView(R.layout.activity_un_splash)
-        val viewPager: ViewPager2 = findViewById(R.id.un_splash_view_pager)
-        val tabLayout: TabLayout = findViewById(R.id.un_splash_tab_layout)
-        setSupportActionBar(findViewById(R.id.un_splash_toolbar))
+        binding = ActivityUnSplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        viewPager.adapter = object : FragmentStateAdapter(this) {
+        binding.unSplashViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 2
             }
@@ -40,14 +42,28 @@ class UnSplashActivity : BaseActivity() {
                 }
             }
         }
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(binding.unSplashTabLayout, binding.unSplashViewPager) { tab, position ->
             tab.text = resources.getStringArray(R.array.un_splash_tabs)[position]
         }.attach()
 
-        viewPager.offscreenPageLimit = 2
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.unSplashViewPager.offscreenPageLimit = 2
+        binding.unSplashViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             // TODO
         })
+        binding.unSplashBottomAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_search -> {
+                    startActivity(Intent(this, SearchActivity::class.java))
+                    true
+                }
+                R.id.action_filter -> {
+                    MaterialAlertDialogBuilder(this).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
     override fun onResume() {
         super.onResume()

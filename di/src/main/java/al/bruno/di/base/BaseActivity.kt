@@ -13,8 +13,8 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
     lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
 

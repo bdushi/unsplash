@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_keywords_to_search_un_splash">Type Keywords to search UnSplash</string>
+    <array name="search_photos_orientations">
+        <item>all</item>
+        <item>landscape</item>
+        <item>portrait</item>
+        <item>squarish</item>
+    </array>
+    <array name="un_splash_tabs">
+        <item>Photo</item>
+        <item>Collection</item>
+        <item>User</item>
+    </array>
+    <string name="un_splash_photo">Photo</string>
+    <string name="un_splash_collection">Collection</string>
+    <string name="un_splash_user">User</string>
+</resources>

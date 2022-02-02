@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="collection"
+                type="al.bruno.un.splash.model.api.Collection"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatImageView
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:transitionName="photoScale"
+                android:scaleType="fitXY"
+                bind:image="@{collection}"/>
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{collection.title}"/>
+
+        <!--TODO-->
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>

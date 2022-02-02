@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+}
+apply plugin: 'kotlin-android'
+android {
+    compileSdk 31
+    namespace 'al.bruno.unsplash'
+    defaultConfig {
+        applicationId "al.bruno.unsplash"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        // Sets Java compatibility to Java 8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation libs.android.core
+    implementation libs.appcompat
+    implementation libs.google.android.material
+    implementation libs.lifecycle
+    api project(path: ':unsplash')
+    // Java 8
+    coreLibraryDesugaring libs.desugar.jdk.libs
+
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.test
+    androidTestImplementation libs.espresso.test
+}

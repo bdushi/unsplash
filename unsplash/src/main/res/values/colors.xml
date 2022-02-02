@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#455A64</color>
+    <color name="colorPrimaryDark">#263238</color>
+    <color name="colorAccent">#FFCF33</color>
+
+    <color name="colorProfilePrimary">#FFF</color>
+    <color name="colorProfilePrimaryDark">#AFAFAF</color>
+    <color name="black">#000</color>
+
+    <color name="secondaryTextColor">#96000000</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="red_a700">#D32F2F</color>
+</resources>

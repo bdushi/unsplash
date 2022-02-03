@@ -5,6 +5,7 @@ import al.bruno.adapter.CustomPagedListAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
+import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
 import al.bruno.un.splash.model.api.Photo
@@ -16,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -24,6 +26,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchPhotoFragment : BaseFragment() {
+    private var _binding: FragmentUnSplashBinding? = null
+    private val binding get() = _binding
+
     @Inject
     lateinit var myRxBusSearch: MyRxBus
     private lateinit var onClickListener: OnClickListener<Photo>
@@ -34,7 +39,7 @@ class SearchPhotoFragment : BaseFragment() {
 
     private val adapter by lazy {
         CustomPagedListAdapter(
-                R.layout.photo_single_item,
+            R.layout.photo_single_item,
             object : BindingData<Photo, PhotoSingleItemBinding> {
                 override fun bindData(t: Photo, vm: PhotoSingleItemBinding) {
                     vm.photo = t
@@ -59,17 +64,12 @@ class SearchPhotoFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val fragmentUnSplashBinding = DataBindingUtil.inflate<FragmentUnSplashBinding>(
-            inflater,
-                R.layout.fragment_un_splash,
-            container,
-            false
-        )
-        fragmentUnSplashBinding.adapter = adapter
-        fragmentUnSplashBinding.viewModel = viewModel
-        fragmentUnSplashBinding.lifecycleOwner = this
-        return fragmentUnSplashBinding.root
+    ): View? {
+        _binding = FragmentUnSplashBinding.inflate(layoutInflater)
+        binding?.adapter = adapter
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,16 +84,18 @@ class SearchPhotoFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { search ->
-                    run {
-                        search.query?.let { query ->
+                    search.query?.let { query ->
+                        collectLatestFlow(
                             viewModel.searchPhotosPagedList(
                                 query,
                                 search.orientation
-                            ).observe(viewLifecycleOwner) { adapter.submitList(it) }
+                            )
+                        ) {
+                            adapter.submitData(it)
+
                         }
                     }
-                },
-                { throwable ->
+                }, { throwable ->
                     Snackbar.make(
                         view,
                         throwable.message.toString(),
@@ -102,5 +104,10 @@ class SearchPhotoFragment : BaseFragment() {
                 }
             )
             .isDisposed
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

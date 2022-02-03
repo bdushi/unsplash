@@ -4,14 +4,14 @@ import al.bruno.adapter.holder.CustomViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 
 class CustomPagedListAdapter<T : Any, VM: ViewDataBinding>(
     private val r: Int,
     private val bindingData: BindingData<T, VM>,
     diffUtil: DiffUtil.ItemCallback<T>
-) : PagedListAdapter<T, CustomViewHolder<T, VM>>(diffUtil) {
+) : PagingDataAdapter<T, CustomViewHolder<T, VM>>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder<T, VM> {
         return CustomViewHolder(LayoutInflater.from(parent.context).inflate(r, parent, false), bindingData)

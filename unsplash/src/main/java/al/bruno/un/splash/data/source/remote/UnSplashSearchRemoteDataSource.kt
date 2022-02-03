@@ -5,17 +5,18 @@ import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.model.api.*
 import javax.inject.Inject
 import retrofit2.Call
+import retrofit2.Response
 
 class UnSplashSearchRemoteDataSource @Inject constructor(private val unSplashSearchService: UnSplashSearchService) : UnSplashSearchDataSource {
-    override fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int): Call<SearchPhotosResult> {
+    override suspend fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int): Response<SearchPhotosResult> {
         return unSplashSearchService.searchPhotos(query = query, page = page, perPage = perPage, orientation = orientation)
     }
 
-    override fun searchUsers(query: CharSequence, page: Int, perPage: Int): Call<SearchUsersResult> {
+    override suspend fun searchUsers(query: CharSequence, page: Int, perPage: Int): Response<SearchUsersResult> {
         return unSplashSearchService.searchUsers(query, page, perPage)
     }
 
-    override fun searchCollections(query: CharSequence, page: Int, perPage: Int): Call<SearchCollectionsResult> {
+    override suspend fun searchCollections(query: CharSequence, page: Int, perPage: Int): Response<SearchCollectionsResult> {
         return unSplashSearchService.searchCollections(query, page, perPage)
     }
 }

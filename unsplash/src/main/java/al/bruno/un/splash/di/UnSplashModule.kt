@@ -1,5 +1,6 @@
 package al.bruno.un.splash.di
 
+import al.bruno.un.splash.BuildConfig
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.utils.MyRxBus
 import com.google.gson.GsonBuilder
@@ -40,7 +41,7 @@ class UnSplashModule {
                                 .newBuilder()
                                 .addHeader(
                                     "Authorization",
-                                    "Client-ID 6ba7be9129630ab29d203a38b66cad0c4aa04824372fc92c849ec486f4ed70e9"
+                                    BuildConfig.UN_SPLASH_API_KEY
                                 )
                                 .build()
                         )

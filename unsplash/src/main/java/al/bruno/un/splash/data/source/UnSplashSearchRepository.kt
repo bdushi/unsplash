@@ -1,38 +1,71 @@
 package al.bruno.un.splash.data.source
 
-
+import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.model.api.*
-import androidx.paging.PageKeyedDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 import javax.inject.Inject
 
 class UnSplashSearchRepository @Inject constructor(private val unSplashSearchDataSource: UnSplashSearchDataSource) {
-    fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int): Call<SearchPhotosResult> {
-        return unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)
-    }
-
-    fun searchUsers(query: CharSequence, page: Int, perPage: Int): Call<SearchUsersResult> {
-        return unSplashSearchDataSource.searchUsers(query = query, page = page, perPage = perPage)
-    }
-
-    fun searchCollections(query: CharSequence, page: Int, perPage: Int): Call<SearchCollectionsResult> {
-        return unSplashSearchDataSource.searchCollections(query = query, page = page, perPage = perPage)
-    }
-
-    fun load(query: CharSequence, orientation: String?, page: Int, perPage: Int, callback: PageKeyedDataSource.LoadCallback<Int, Photo>) {
-        unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)
-            .enqueue(object : Callback<SearchPhotosResult> {
-                override fun onResponse(call: Call<SearchPhotosResult>, response: Response<SearchPhotosResult>) {
-                    response.body()?.let { searchPhotosResult -> searchPhotosResult.results.let { callback.onResult(it, searchPhotosResult.total)
-                    }
-                }
+    suspend fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int) : Result<SearchPhotosResult> {
+        return try {
+            Result.Loading<SearchPhotosResult>()
+            val response = unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.Success(body)
+            } else {
+                Result.Error(response.message())
             }
+        } catch (ex: Exception) {
+            Result.Error(ex.message)
+        }
+    }
+//    fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int) = flow {
+//        runCatching {
+//            emit(Result.Loading<SearchPhotosResult>())
+//            unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)
+//        }.onSuccess { response ->
+//            if (response.isSuccessful && response.body() != null) {
+//                emit(Result.Success(response.body()))
+//            } else {
+//                emit(Result.Error(response.message()))
+//            }
+//        }.onFailure {
+//
+//            emit(Result.Error(it.message))
+//        }
+//    }
 
-            override fun onFailure(call: Call<SearchPhotosResult>, t: Throwable) {
+    suspend fun searchUsers(query: CharSequence, page: Int, perPage: Int): Result<SearchUsersResult?> {
+        return try {
+            Result.Loading<SearchUsersResult>()
+            val response = unSplashSearchDataSource.searchUsers(query = query, page = page, perPage = perPage)
+            if (response.isSuccessful && response.body() != null) {
+                Result.Success(response.body())
+            } else {
+                Result.Error(response.message())
             }
-        })
+        } catch (ex: Exception) {
+            Result.Error(ex.message)
+        }
     }
 
+    suspend fun searchCollections(query: CharSequence, page: Int, perPage: Int): Result<SearchCollectionsResult?> {
+        return try {
+            Result.Loading<SearchCollectionsResult>()
+            val response = unSplashSearchDataSource.searchCollections(query = query, page = page, perPage = perPage)
+            if (response.isSuccessful && response.body() != null) {
+                Result.Success(response.body())
+            } else {
+                Result.Error(response.message())
+            }
+        } catch (ex: Exception) {
+            Result.Error(ex.message)
+        }
+    }
 }

@@ -8,7 +8,7 @@ package al.bruno.un.splash.model.api
  * "thumb": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d?q=75&fm=jpg&w=200&fit=max"
  */
 
-data class PhotoUrls(
+data class Urls(
     val raw: String,
     val full: String,
     val regular: String,

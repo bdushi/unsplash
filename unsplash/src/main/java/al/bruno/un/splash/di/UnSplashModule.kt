@@ -4,6 +4,7 @@ import al.bruno.un.splash.BuildConfig
 import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
 import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
+import al.bruno.un.splash.data.source.remote.service.UnSplashUserService
 import al.bruno.un.splash.utils.MyRxBus
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -73,5 +74,11 @@ class UnSplashModule {
     @Reusable
     fun searchUnSplashCollectionService(retrofit: Retrofit): UnSplashCollectionService {
         return retrofit.create(UnSplashCollectionService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashUserService(retrofit: Retrofit): UnSplashUserService{
+        return retrofit.create(UnSplashUserService::class.java)
     }
 }

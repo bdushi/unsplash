@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="user"
             type="al.bruno.un.splash.model.api.User" />
+        <variable
+            name="adapter"
+            type="al.bruno.adapter.CustomPagedListAdapter" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_margin="4dp">
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/un_splash_user_profile_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_margin="4dp"
             android:clickable="true"
             android:focusable="true"
-            bind:image="@{user.profileImage}" />
+            bind:image="@{user.profileImage}"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:orientation="vertical">
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_user_card_name"
+                android:id="@+id/un_splash_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{user.name}"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                bind:layout_constraintTop_toTopOf="parent"
+                bind:layout_constraintBottom_toTopOf="@+id/un_splash_user_username"
+                bind:layout_constraintStart_toEndOf="@id/un_splash_user_profile_image"
+                bind:layout_constraintEnd_toEndOf="parent"/>
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_user_card_username"
+                android:id="@+id/un_splash_user_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{user.username}" />
+                android:text="@{user.username}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                bind:layout_constraintTop_toBottomOf="@+id/un_splash_user_name"
+                bind:layout_constraintStart_toEndOf="@id/un_splash_user_profile_image"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintBottom_toTopOf="@+id/un_splash_user_photo"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/un_splash_user_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_margin="8dp"
+                android:adapter="@{adapter}"
+                bind:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:layout_constraintTop_toBottomOf="@+id/un_splash_user_username"
+                bind:layout_constraintEnd_toEndOf="parent"
+                bind:layout_constraintStart_toEndOf="@id/un_splash_user_profile_image" />
         </LinearLayout>
     </LinearLayout>
 </layout>

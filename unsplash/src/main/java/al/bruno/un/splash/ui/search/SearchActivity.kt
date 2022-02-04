@@ -9,7 +9,6 @@ import al.bruno.un.splash.ui.search.collection.SearchCollectionFragment
 import al.bruno.un.splash.ui.search.photo.SearchPhotoFragment
 import al.bruno.un.splash.ui.search.user.SearchUserFragment
 import al.bruno.un.splash.utils.MyRxBus
-import al.bruno.un.splash.utils.PHOTO
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -55,7 +54,7 @@ class SearchActivity : BaseActivity() {
                 return when (position) {
                     0 -> SearchPhotoFragment().setOnClickListener(object : OnClickListener<Photo> {
                         override fun onClick(t: Photo) {
-                            setResult(Activity.RESULT_OK, Intent().putExtra(PHOTO, t.urls.regular))
+                            setResult(Activity.RESULT_OK, Intent().putExtra("PHOTO", t.urls.regular))
                             finish()
                         }
                     })

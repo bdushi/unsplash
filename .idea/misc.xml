@@ -13,10 +13,11 @@
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.25885416666666666" />
         <entry key="unsplash/src/main/res/drawable/ic_outline_search_24.xml" value="0.13" />
         <entry key="unsplash/src/main/res/layout/activity_search.xml" value="0.25885416666666666" />
-        <entry key="unsplash/src/main/res/layout/activity_un_splash.xml" value="0.15416666666666667" />
+        <entry key="unsplash/src/main/res/layout/activity_un_splash.xml" value="0.1" />
         <entry key="unsplash/src/main/res/layout/collection_single_item.xml" value="0.15416666666666667" />
         <entry key="unsplash/src/main/res/layout/fragment_un_splash.xml" value="0.15416666666666667" />
         <entry key="unsplash/src/main/res/layout/photo_single_item.xml" value="0.14010416666666667" />
+        <entry key="unsplash/src/main/res/layout/user_photo_single_item.xml" value="0.153125" />
         <entry key="unsplash/src/main/res/layout/users_single_item.xml" value="0.25885416666666666" />
         <entry key="unsplash/src/main/res/menu/un_splash_menu.xml" value="0.153125" />
       </map>

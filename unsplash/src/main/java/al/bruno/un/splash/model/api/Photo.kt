@@ -17,7 +17,7 @@ data class Photo(
     val exif: Exif,
     val location: Location,
     @SerializedName("current_user_collections") val currentUserCollections: List<Collection>,
-    val urls: PhotoUrls,
+    val urls: Urls,
     val links: PhotoLinks,
     val user: User,
     val story: Story

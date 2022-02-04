@@ -5,7 +5,6 @@ import al.bruno.un.splash.model.api.Collection
 import javax.inject.Inject
 
 class UnSplashCollectionRepository @Inject constructor(private val unSplashCollectionDataSource: UnSplashCollectionDataSource) {
-
     suspend fun collections(
         page: Int?, perPage: Int?
     ): Result<List<Collection>> {

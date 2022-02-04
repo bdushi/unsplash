@@ -2,11 +2,13 @@ package al.bruno.un.splash.ui.search
 
 import al.bruno.di.base.BaseViewModel
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
+import al.bruno.un.splash.data.source.UnSplashUserRepository
 import al.bruno.un.splash.model.api.Collection
 import al.bruno.un.splash.model.api.Photo
 import al.bruno.un.splash.model.api.User
 import al.bruno.un.splash.ui.search.collection.paging.UnSplashSearchCollectionPagingSource
 import al.bruno.un.splash.ui.search.photo.paging.UnSplashedSearchPhotoPagingSource
+import al.bruno.un.splash.ui.search.user.paging.UnSplashUserPhotoPagingSource
 import al.bruno.un.splash.ui.search.user.paging.UnSplashSearchUserPagingSource
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -17,7 +19,8 @@ import javax.inject.Singleton
 
 @Singleton
 class UnSplashSearchViewModel @Inject constructor(
-    private val unSplashSearchRepository: UnSplashSearchRepository
+    private val unSplashSearchRepository: UnSplashSearchRepository,
+    private val unSplashUserRepository: UnSplashUserRepository
 ) : BaseViewModel() {
     fun searchPhotosPagedList(
         query: CharSequence,
@@ -57,6 +60,16 @@ class UnSplashSearchViewModel @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { UnSplashSearchUserPagingSource(unSplashSearchRepository, query) }
+        ).flow
+    }
+
+    fun photo(username: String): Flow<PagingData<Photo>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnSplashUserPhotoPagingSource(unSplashUserRepository, username) }
         ).flow
     }
 }

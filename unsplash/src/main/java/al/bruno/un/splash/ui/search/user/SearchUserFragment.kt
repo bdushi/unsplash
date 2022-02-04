@@ -8,6 +8,7 @@ import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
+import al.bruno.un.splash.databinding.UsersPhotoSingleItemBinding
 import al.bruno.un.splash.databinding.UsersSingleItemBinding
 import al.bruno.un.splash.model.api.Photo
 import al.bruno.un.splash.model.api.User
@@ -38,12 +39,32 @@ class SearchUserFragment : BaseFragment() {
         ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
     }
 
+    private val userPhotoAdapter by lazy {
+        CustomPagedListAdapter(
+            R.layout.users_photo_single_item,
+            object : BindingData<Photo, UsersPhotoSingleItemBinding> {
+                override fun bindData(t: Photo, vm: UsersPhotoSingleItemBinding) {
+                    vm.photo = t
+                }
+            },
+            object : DiffUtil.ItemCallback<Photo>() {
+                override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean =
+                    oldItem == newItem
+
+                override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean =
+                    oldItem.id == newItem.id
+            })
+    }
     private val adapter by lazy {
         CustomPagedListAdapter(
             R.layout.users_single_item,
             object : BindingData<User, UsersSingleItemBinding> {
                 override fun bindData(t: User, vm: UsersSingleItemBinding) {
                     vm.user = t
+                    vm.adapter = userPhotoAdapter
+                    collectLatestFlow(viewModel.photo(t.username)) {
+                        userPhotoAdapter.submitData(it)
+                    }
                 }
             },
             object : DiffUtil.ItemCallback<User>() {

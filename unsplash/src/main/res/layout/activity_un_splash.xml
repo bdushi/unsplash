@@ -18,7 +18,6 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/primaryTextColor"
             app:tabTextColor="@color/secondaryTextColor" />
-        <!--viewpager2-->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/un_splash_view_pager"
             android:layout_width="match_parent"
@@ -31,6 +30,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/un_splash_menu"
-        app:hideOnScroll="true"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"/>
+        app:hideOnScroll="true"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

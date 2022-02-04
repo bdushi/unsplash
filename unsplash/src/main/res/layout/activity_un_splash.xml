@@ -31,5 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/un_splash_menu"
+        app:hideOnScroll="true"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

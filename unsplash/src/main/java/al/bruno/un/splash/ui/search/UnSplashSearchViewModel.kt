@@ -1,32 +1,24 @@
 package al.bruno.un.splash.ui.search
 
-import al.bruno.un.splash.common.Result
-import al.bruno.un.splash.data.source.UnSplashSearchDataSource
+import al.bruno.di.base.BaseViewModel
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
+import al.bruno.un.splash.model.api.Collection
 import al.bruno.un.splash.model.api.Photo
-import al.bruno.un.splash.paging.UnSplashedPagingSource
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import al.bruno.un.splash.model.api.User
+import al.bruno.un.splash.ui.search.collection.paging.UnSplashSearchCollectionPagingSource
+import al.bruno.un.splash.ui.search.photo.paging.UnSplashedSearchPhotoPagingSource
+import al.bruno.un.splash.ui.search.user.paging.UnSplashSearchUserPagingSource
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class UnSplashSearchViewModel @Inject constructor(
-    private val unSplashSearchRepository: UnSplashSearchRepository) :
-    ViewModel() {
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
-    private val _loading = MutableLiveData<Boolean>()
-    var loading: LiveData<Boolean> = _loading
-
+    private val unSplashSearchRepository: UnSplashSearchRepository
+) : BaseViewModel() {
     fun searchPhotosPagedList(
         query: CharSequence,
         orientation: String?
@@ -36,28 +28,35 @@ class UnSplashSearchViewModel @Inject constructor(
                 pageSize = 30,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnSplashedPagingSource(unSplashSearchRepository, _error, _loading, query, orientation) }
+            pagingSourceFactory = {
+                UnSplashedSearchPhotoPagingSource(
+                    unSplashSearchRepository,
+                    _error,
+                    _loading,
+                    query,
+                    orientation
+                )
+            }
         ).flow
     }
 
-    fun searchCollections(query: String) {
-        viewModelScope.launch {
-            when (unSplashSearchRepository.searchCollections(query, 1, 30)) {
-                is Result.Error -> {
-                }
-                is Result.Success -> {
-                }
-                is Result.Loading -> {
-
-                }
-            }
-        }
+    fun searchCollections(query: CharSequence): Flow<PagingData<Collection>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnSplashSearchCollectionPagingSource(unSplashSearchRepository, query) }
+        ).flow
     }
 
-    fun searchUsers(query: String) {
-        viewModelScope.launch {
-            unSplashSearchRepository
-                .searchUsers(query, 1, 30)
-        }
+    fun searchUsers(query: CharSequence): Flow<PagingData<User>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnSplashSearchUserPagingSource(unSplashSearchRepository, query) }
+        ).flow
     }
 }

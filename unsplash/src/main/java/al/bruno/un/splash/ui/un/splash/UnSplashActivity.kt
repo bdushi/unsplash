@@ -6,7 +6,7 @@ import al.bruno.un.splash.databinding.ActivityUnSplashBinding
 import al.bruno.un.splash.model.api.Search
 import al.bruno.un.splash.ui.search.SearchActivity
 import al.bruno.un.splash.ui.un.splash.collections.CollectionsFragment
-import al.bruno.un.splash.ui.un.splash.home.HomeFragment
+import al.bruno.un.splash.ui.un.splash.photo.PhotoFragment
 import al.bruno.un.splash.utils.MyRxBus
 import android.content.Intent
 import android.os.Bundle
@@ -35,9 +35,9 @@ class UnSplashActivity : BaseActivity() {
 
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    0 -> HomeFragment()
+                    0 -> PhotoFragment()
                     1 -> CollectionsFragment()
-                    else -> HomeFragment()
+                    else -> PhotoFragment()
                 }
             }
         }

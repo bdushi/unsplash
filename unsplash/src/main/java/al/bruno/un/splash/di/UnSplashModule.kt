@@ -1,6 +1,8 @@
 package al.bruno.un.splash.di
 
 import al.bruno.un.splash.BuildConfig
+import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
+import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.utils.MyRxBus
 import com.google.gson.GsonBuilder
@@ -57,7 +59,19 @@ class UnSplashModule {
 
     @Provides
     @Reusable
-    fun searchService(retrofit: Retrofit): UnSplashSearchService {
+    fun searchUnSplashSearchService(retrofit: Retrofit): UnSplashSearchService {
         return retrofit.create(UnSplashSearchService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashPhotoService(retrofit: Retrofit): UnSplashPhotoService {
+        return retrofit.create(UnSplashPhotoService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashCollectionService(retrofit: Retrofit): UnSplashCollectionService {
+        return retrofit.create(UnSplashCollectionService::class.java)
     }
 }

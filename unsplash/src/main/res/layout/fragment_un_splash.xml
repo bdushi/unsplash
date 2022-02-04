@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="adapter"
             type="al.bruno.adapter.CustomPagedListAdapter" />
 
         <variable
             name="viewModel"
-            type="al.bruno.un.splash.ui.search.UnSplashSearchViewModel" />
+            type="al.bruno.di.base.BaseViewModel" />
 
         <variable
             name="refreshListener"

@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Photo(
     val id: String,
-    val created_at: String,
-    val updated_at: String,
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("updated_at") val updatedAt: String,
     val width: Int,
     val height: Int,
     val color: String,

@@ -5,6 +5,7 @@ import al.bruno.adapter.CustomPagedListAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
+import al.bruno.un.splash.common.collectFlow
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
@@ -74,7 +75,7 @@ class SearchPhotoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.error.observe(viewLifecycleOwner) {
+        collectFlow(viewModel.error) {
             Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
         }
         myRxBusSearch

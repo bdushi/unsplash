@@ -1,4 +1,4 @@
-package al.bruno.un.splash.paging
+package al.bruno.un.splash.ui.search.photo.paging
 
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
@@ -6,11 +6,12 @@ import al.bruno.un.splash.model.api.Photo
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.flow.StateFlow
 
-class UnSplashedPagingSource(
+class UnSplashedSearchPhotoPagingSource(
     private val unSplashSearchDataSource: UnSplashSearchRepository,
-    private val error: MutableLiveData<String>,
-    private val loading: MutableLiveData<Boolean>,
+    private val error: StateFlow<String>,
+    private val loading: StateFlow<Boolean>,
     private val query: CharSequence,
     private val orientation: String?
 ) : PagingSource<Int, Photo>() {

@@ -25,28 +25,14 @@ class UnSplashSearchRepository @Inject constructor(private val unSplashSearchDat
             Result.Error(ex.message)
         }
     }
-//    fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int) = flow {
-//        runCatching {
-//            emit(Result.Loading<SearchPhotosResult>())
-//            unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)
-//        }.onSuccess { response ->
-//            if (response.isSuccessful && response.body() != null) {
-//                emit(Result.Success(response.body()))
-//            } else {
-//                emit(Result.Error(response.message()))
-//            }
-//        }.onFailure {
-//
-//            emit(Result.Error(it.message))
-//        }
-//    }
 
-    suspend fun searchUsers(query: CharSequence, page: Int, perPage: Int): Result<SearchUsersResult?> {
+    suspend fun searchUsers(query: CharSequence, page: Int, perPage: Int): Result<SearchUsersResult> {
         return try {
             Result.Loading<SearchUsersResult>()
             val response = unSplashSearchDataSource.searchUsers(query = query, page = page, perPage = perPage)
-            if (response.isSuccessful && response.body() != null) {
-                Result.Success(response.body())
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.Success(body)
             } else {
                 Result.Error(response.message())
             }
@@ -55,12 +41,13 @@ class UnSplashSearchRepository @Inject constructor(private val unSplashSearchDat
         }
     }
 
-    suspend fun searchCollections(query: CharSequence, page: Int, perPage: Int): Result<SearchCollectionsResult?> {
+    suspend fun searchCollections(query: CharSequence, page: Int, perPage: Int): Result<SearchCollectionsResult> {
         return try {
             Result.Loading<SearchCollectionsResult>()
             val response = unSplashSearchDataSource.searchCollections(query = query, page = page, perPage = perPage)
-            if (response.isSuccessful && response.body() != null) {
-                Result.Success(response.body())
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                Result.Success(body)
             } else {
                 Result.Error(response.message())
             }

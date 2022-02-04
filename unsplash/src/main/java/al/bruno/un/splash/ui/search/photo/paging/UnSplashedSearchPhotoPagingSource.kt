@@ -1,5 +1,6 @@
 package al.bruno.un.splash.ui.search.photo.paging
 
+import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
 import al.bruno.un.splash.model.api.Photo
@@ -27,7 +28,7 @@ class UnSplashedSearchPhotoPagingSource(
         return try {
             when (val response = unSplashSearchDataSource.searchPhotos(
                 query = query,
-                orientation = orientation,
+                orientation = Orientation.portrait,
                 page = position,
                 perPage = params.loadSize
             )) {

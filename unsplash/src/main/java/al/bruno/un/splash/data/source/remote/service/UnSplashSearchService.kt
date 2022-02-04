@@ -1,6 +1,7 @@
 package al.bruno.un.splash.data.source.remote.service
 
 
+import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.model.api.SearchCollectionsResult
 import al.bruno.un.splash.model.api.SearchPhotosResult
 import al.bruno.un.splash.model.api.SearchUsersResult
@@ -16,7 +17,7 @@ interface UnSplashSearchService {
     @GET("search/photos")
     suspend fun searchPhotos(
         @Query("query") query: CharSequence,
-        @Query("orientation") orientation: String?,
+        @Query("orientation") orientation: Orientation,
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): Response<SearchPhotosResult>

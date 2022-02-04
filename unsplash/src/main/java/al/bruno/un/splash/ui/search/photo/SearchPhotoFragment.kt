@@ -16,9 +16,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -75,9 +73,9 @@ class SearchPhotoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collectFlow(viewModel.error) {
+        /*collectLatestFlow(viewModel.error) {
             Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show()
-        }
+        }*/
         myRxBusSearch
             .getRxBus()
             .debounce(500, TimeUnit.MILLISECONDS)

@@ -1,5 +1,6 @@
 package al.bruno.un.splash.data.source
 
+import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.model.api.*
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class UnSplashSearchRepository @Inject constructor(private val unSplashSearchDataSource: UnSplashSearchDataSource) {
-    suspend fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int) : Result<SearchPhotosResult> {
+    suspend fun searchPhotos(query: CharSequence, orientation: Orientation, page: Int, perPage: Int) : Result<SearchPhotosResult> {
         return try {
             Result.Loading<SearchPhotosResult>()
             val response = unSplashSearchDataSource.searchPhotos(query = query, orientation = orientation, page = page, perPage = perPage)

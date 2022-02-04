@@ -1,5 +1,6 @@
 package al.bruno.un.splash.data.source.remote
 
+import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.data.source.UnSplashSearchDataSource
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.model.api.*
@@ -8,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class UnSplashSearchRemoteDataSource @Inject constructor(private val unSplashSearchService: UnSplashSearchService) : UnSplashSearchDataSource {
-    override suspend fun searchPhotos(query: CharSequence, orientation: String?, page: Int, perPage: Int): Response<SearchPhotosResult> {
+    override suspend fun searchPhotos(query: CharSequence, orientation: Orientation, page: Int, perPage: Int): Response<SearchPhotosResult> {
         return unSplashSearchService.searchPhotos(query = query, page = page, perPage = perPage, orientation = orientation)
     }
 

@@ -1,5 +1,6 @@
 package al.bruno.un.splash.ui.search
 
+import PHOTO
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseActivity
 import al.bruno.un.splash.R
@@ -54,7 +55,7 @@ class SearchActivity : BaseActivity() {
                 return when (position) {
                     0 -> SearchPhotoFragment().setOnClickListener(object : OnClickListener<Photo> {
                         override fun onClick(t: Photo) {
-                            setResult(Activity.RESULT_OK, Intent().putExtra("PHOTO", t.urls.regular))
+                            setResult(Activity.RESULT_OK, Intent().putExtra(PHOTO, t.urls.regular))
                             finish()
                         }
                     })

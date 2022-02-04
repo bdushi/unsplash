@@ -64,12 +64,6 @@ class UnSplashActivity : BaseActivity() {
         }
 
     }
-    override fun onResume() {
-        super.onResume()
-        /*if (mEditText.getText().toString() != "") {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-        }*/
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()

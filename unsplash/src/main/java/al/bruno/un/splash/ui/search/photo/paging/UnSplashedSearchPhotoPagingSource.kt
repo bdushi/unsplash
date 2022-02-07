@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class UnSplashedSearchPhotoPagingSource(
     private val unSplashSearchDataSource: UnSplashSearchRepository,
-    private val error: StateFlow<String>,
+    private val error: StateFlow<String?>,
     private val loading: StateFlow<Boolean>,
     private val query: CharSequence,
     private val orientation: String?
@@ -28,7 +28,7 @@ class UnSplashedSearchPhotoPagingSource(
         return try {
             when (val response = unSplashSearchDataSource.searchPhotos(
                 query = query,
-                orientation = Orientation.portrait,
+                orientation = Orientation.all,
                 page = position,
                 perPage = params.loadSize
             )) {

@@ -13,8 +13,8 @@ interface UnSplashUserService {
     @GET("users/{username}/photos")
     suspend fun photos(
         @Path("username") username: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int,
+        @Query("page") page: Int?,
+        @Query("per_page") perPage: Int?,
         @Query("order_by") orderBy: OrderBy,
         @Query("resolution") resolution: Resolution,
         @Query("orientation") orientation: Orientation,

@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 
-class CustomPagedListAdapter<T : Any, VM: ViewDataBinding>(
+class PagedListAdapter<T : Any, VM: ViewDataBinding>(
     private val r: Int,
     private val bindingData: BindingData<T, VM>,
     diffUtil: DiffUtil.ItemCallback<T>
@@ -18,6 +18,6 @@ class CustomPagedListAdapter<T : Any, VM: ViewDataBinding>(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder<T, VM>, position: Int) {
-        getItem(position)?.let{ holder.bind(it) }
+        getItem(position)?.let { holder.bind(it) }
     }
 }

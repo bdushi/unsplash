@@ -1,15 +1,15 @@
 package al.bruno.un.splash.ui.search.user
 
-import al.bruno.adapter.BindingData
-import al.bruno.adapter.CustomPagedListAdapter
-import al.bruno.adapter.OnClickListener
+import al.bruno.adapter.*
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
+import al.bruno.un.splash.adapter.ParentItemAdapter
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
-import al.bruno.un.splash.databinding.PhotoSingleItemBinding
+import al.bruno.un.splash.databinding.UnSplashUserItemBinding
 import al.bruno.un.splash.databinding.UsersPhotoSingleItemBinding
 import al.bruno.un.splash.databinding.UsersSingleItemBinding
+import al.bruno.un.splash.dto.UsersPhoto
 import al.bruno.un.splash.model.api.Photo
 import al.bruno.un.splash.model.api.User
 import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
@@ -18,7 +18,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.snackbar.Snackbar
@@ -38,42 +37,8 @@ class SearchUserFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
     }
-
-    private val userPhotoAdapter by lazy {
-        CustomPagedListAdapter(
-            R.layout.users_photo_single_item,
-            object : BindingData<Photo, UsersPhotoSingleItemBinding> {
-                override fun bindData(t: Photo, vm: UsersPhotoSingleItemBinding) {
-                    vm.photo = t
-                }
-            },
-            object : DiffUtil.ItemCallback<Photo>() {
-                override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean =
-                    oldItem == newItem
-
-                override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean =
-                    oldItem.id == newItem.id
-            })
-    }
     private val adapter by lazy {
-        CustomPagedListAdapter(
-            R.layout.users_single_item,
-            object : BindingData<User, UsersSingleItemBinding> {
-                override fun bindData(t: User, vm: UsersSingleItemBinding) {
-                    vm.user = t
-                    vm.adapter = userPhotoAdapter
-                    collectLatestFlow(viewModel.photo(t.username)) {
-                        userPhotoAdapter.submitData(it)
-                    }
-                }
-            },
-            object : DiffUtil.ItemCallback<User>() {
-                override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
-                    oldItem == newItem
-
-                override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
-                    oldItem.id == newItem.id
-            })
+        ParentItemAdapter(R.layout.un_splash_user_item)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

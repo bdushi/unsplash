@@ -14,8 +14,8 @@ class UnSplashCollectionsViewModel @Inject constructor(private var unSplashColle
     fun collectionPagedList(): Flow<PagingData<Collection>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 30,
-                enablePlaceholders = false
+                pageSize = DEFAULT_BUFFER_SIZE,
+                enablePlaceholders = true
             ),
             pagingSourceFactory = {
                 CollectionPagingSource(

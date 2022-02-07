@@ -7,7 +7,7 @@
             type="al.bruno.un.splash.model.api.User" />
         <variable
             name="adapter"
-            type="al.bruno.adapter.CustomPagedListAdapter" />
+            type="al.bruno.adapter.CustomListAdapter" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

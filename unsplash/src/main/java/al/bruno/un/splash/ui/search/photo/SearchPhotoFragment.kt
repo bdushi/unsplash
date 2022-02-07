@@ -1,11 +1,10 @@
 package al.bruno.un.splash.ui.search.photo
 
 import al.bruno.adapter.BindingData
-import al.bruno.adapter.CustomPagedListAdapter
+import al.bruno.adapter.PagedListAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
-import al.bruno.un.splash.common.collectFlow
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
@@ -37,7 +36,7 @@ class SearchPhotoFragment : BaseFragment() {
     }
 
     private val adapter by lazy {
-        CustomPagedListAdapter(
+        PagedListAdapter(
             R.layout.photo_single_item,
             object : BindingData<Photo, PhotoSingleItemBinding> {
                 override fun bindData(t: Photo, vm: PhotoSingleItemBinding) {

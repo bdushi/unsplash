@@ -17,7 +17,10 @@
         <entry key="unsplash/src/main/res/layout/collection_single_item.xml" value="0.15416666666666667" />
         <entry key="unsplash/src/main/res/layout/fragment_un_splash.xml" value="0.15416666666666667" />
         <entry key="unsplash/src/main/res/layout/photo_single_item.xml" value="0.14010416666666667" />
+        <entry key="unsplash/src/main/res/layout/un_splash_user_item.xml" value="0.15260416666666668" />
+        <entry key="unsplash/src/main/res/layout/un_splash_users_photo_item.xml" value="0.2490740740740741" />
         <entry key="unsplash/src/main/res/layout/user_photo_single_item.xml" value="0.153125" />
+        <entry key="unsplash/src/main/res/layout/users_photo_single_item.xml" value="0.25833333333333336" />
         <entry key="unsplash/src/main/res/layout/users_single_item.xml" value="0.25885416666666666" />
         <entry key="unsplash/src/main/res/menu/un_splash_menu.xml" value="0.153125" />
       </map>

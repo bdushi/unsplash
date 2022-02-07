@@ -1,7 +1,7 @@
 package al.bruno.un.splash.ui.un.splash.collections
 
 import al.bruno.adapter.BindingData
-import al.bruno.adapter.CustomPagedListAdapter
+import al.bruno.adapter.PagedListAdapter
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
@@ -24,7 +24,7 @@ class CollectionsFragment : BaseFragment() {
     }
 
     private val adapter by lazy {
-        CustomPagedListAdapter(
+        PagedListAdapter(
             R.layout.collection_single_item,
             object : BindingData<Collection, CollectionSingleItemBinding> {
                 override fun bindData(t: Collection, vm: CollectionSingleItemBinding) {

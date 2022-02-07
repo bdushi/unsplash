@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
 class UnSplashActivity : BaseActivity() {
-
     lateinit var binding: ActivityUnSplashBinding
     @Inject lateinit var myRxBusSearch: MyRxBus
     val search = Search(null, null)

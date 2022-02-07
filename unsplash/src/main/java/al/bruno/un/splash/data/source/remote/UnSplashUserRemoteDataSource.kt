@@ -12,8 +12,8 @@ import javax.inject.Inject
 class UnSplashUserRemoteDataSource @Inject constructor(private val unSplashUserService: UnSplashUserService): UnSplashUserDataSource {
     override suspend fun photos(
         username: String,
-        page: Int,
-        perPage: Int,
+        page: Int?,
+        perPage: Int?,
         orderBy: OrderBy,
         resolution: Resolution,
         orientation: Orientation,

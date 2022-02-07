@@ -13,13 +13,13 @@ import javax.inject.Inject
 class UnSplashUserRepository @Inject constructor(private val unSplashUserDataSource: UnSplashUserDataSource){
     suspend fun photos(
         username: String,
-        page: Int,
-        perPage: Int,
+        page: Int?,
+        perPage: Int?,
         orderBy: OrderBy = OrderBy.latest,
         resolution: Resolution = Resolution.days,
-        orientation: Orientation = Orientation.portrait,
+        orientation: Orientation = Orientation.all,
         stats: Boolean = false,
-        quantity: Int = 30
+        quantity: Int = 10
     ): Result<List<Photo>> {
         return try {
             Result.Loading<List<Photo>>()

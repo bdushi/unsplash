@@ -9,11 +9,11 @@ import retrofit2.Response
 interface UnSplashUserDataSource {
     suspend fun photos(
         username: String,
-        page: Int,
-        perPage: Int,
+        page: Int?,
+        perPage: Int?,
         orderBy: OrderBy = OrderBy.latest,
         resolution: Resolution = Resolution.days,
-        orientation: Orientation = Orientation.landscape,
+        orientation: Orientation = Orientation.all,
         stats: Boolean = false,
         quantity: Int = 30
     ): Response<List<Photo>>

@@ -16,8 +16,8 @@ class UnSplashPhotoViewModel @Inject constructor(private var unSplashPhotoReposi
     ): Flow<PagingData<Photo>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 30,
-                enablePlaceholders = false
+                pageSize = DEFAULT_BUFFER_SIZE,
+                enablePlaceholders = true
             ),
             pagingSourceFactory = {
                 PhotoPagingSource(

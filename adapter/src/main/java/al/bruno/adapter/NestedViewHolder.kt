@@ -5,11 +5,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-class NestedViewHolder<T, VM : ViewDataBinding>(itemView: View, private val bindingData: BindingData<T, VM>) : RecyclerView.ViewHolder(itemView) {
+class NestedViewHolder<T, VM : ViewDataBinding>(itemView: View, private val bindingData: (t: T, vm: VM) -> Unit) : RecyclerView.ViewHolder(itemView) {
     private val binding: VM? = DataBindingUtil.bind(itemView)
     fun bind(t:T) {
         binding?.let {
-            bindingData.bindData(t, it)
+            bindingData.invoke(t, it)
             it.executePendingBindings()
         }
     }

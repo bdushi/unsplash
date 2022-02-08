@@ -9,9 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:theme="@style/Re.Splash.Toolbar.Theme">
-
+        android:orientation="vertical">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/un_splash_toolbar"
             android:layout_width="match_parent"

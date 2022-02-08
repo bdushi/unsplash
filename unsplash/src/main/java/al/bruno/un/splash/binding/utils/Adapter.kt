@@ -1,26 +1,43 @@
 package al.bruno.un.splash.binding.utils
 
+/**
+ * https://futurestud.io/tutorials/picasso-image-resizing-scaling-and-fit
+ *
+ * https://betterprogramming.pub/aspect-ratio-with-constraint-layout-with-constraintdimensionratio-d55828ec4aae
+ */
+
 import al.bruno.un.splash.model.api.Collection
 import al.bruno.un.splash.model.api.Photo
 import al.bruno.un.splash.model.api.ProfileImage
-
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 
+
 object Adapter {
+
+    @JvmStatic
+    @BindingAdapter("bind:small")
+    fun imageSmallProvider(imageView: ShapeableImageView, photo: Photo) {
+        val finalHeight =
+            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width.toFloat() / photo.height.toFloat())
+        imageView.minimumHeight = finalHeight.toInt()
+        Picasso
+            .get()
+            .load(photo.urls.small)
+            .into(imageView)
+    }
+
     @JvmStatic
     @BindingAdapter("bind:image")
     fun imageProvider(imageView: AppCompatImageView, photo: Photo) {
-//        val finalHeight =
-//            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width.toFloat() / photo.height.toFloat())
-//        imageView.minimumHeight = finalHeight.toInt()
+        val finalHeight =
+            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width.toFloat() / photo.height.toFloat())
+        imageView.minimumHeight = finalHeight.toInt()
         Picasso
             .get()
             .load(photo.urls.regular)
-            .resize(60, 123)
-            .centerCrop()
             .into(imageView)
     }
 

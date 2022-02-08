@@ -2,11 +2,6 @@ package al.bruno.un.splash.adapter
 
 import androidx.paging.PagingDataAdapter
 import al.bruno.un.splash.dto.UsersPhoto
-import al.bruno.adapter.CustomListAdapter
-import al.bruno.un.splash.R
-import al.bruno.adapter.BindingData
-import al.bruno.un.splash.databinding.UsersPhotoSingleItemBinding
-import al.bruno.un.splash.model.api.Photo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import android.view.ViewGroup

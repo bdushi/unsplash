@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 
 class NestedPagedListAdapter<T : Any, VM: ViewDataBinding>(
     private val r: Int,
-    private val bindingData: BindingData<T, VM>,
+    private val bindingData: (t: T, vm: VM) -> Unit,
     diffUtil: DiffUtil.ItemCallback<T>
 ) : PagingDataAdapter<T, NestedViewHolder<T, VM>>(diffUtil) {
 

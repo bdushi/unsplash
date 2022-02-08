@@ -1,6 +1,5 @@
 package al.bruno.un.splash.ui.un.splash.collections
 
-import al.bruno.adapter.BindingData
 import al.bruno.adapter.PagedListAdapter
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
@@ -26,10 +25,8 @@ class CollectionsFragment : BaseFragment() {
     private val adapter by lazy {
         PagedListAdapter(
             R.layout.collection_single_item,
-            object : BindingData<Collection, CollectionSingleItemBinding> {
-                override fun bindData(t: Collection, vm: CollectionSingleItemBinding) {
-                    vm.collection = t
-                }
+            { t: Collection, vm: CollectionSingleItemBinding ->
+                vm.collection = t
             },
             object : DiffUtil.ItemCallback<Collection>() {
                 override fun areItemsTheSame(oldItem: Collection, newItem: Collection): Boolean =

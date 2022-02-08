@@ -10,13 +10,17 @@
             name="onClick"
             type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.api.Photo&gt;" />
     </data>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="@dimen/user_profile_photo_min_height"
-        android:maxHeight="@dimen/user_profile_photo_max_height"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        bind:layout_constraintBottom_toBottomOf="parent"
+        bind:layout_constraintRight_toRightOf="parent"
+        bind:layout_constraintLeft_toLeftOf="parent"
+        bind:layout_constraintTop_toTopOf="parent"
         android:onClick="@{(v) -> onClick.onClick(photo)}"
         android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:layout_margin="4dp"
-        bind:image="@{photo}" />
+        bind:shapeAppearanceOverlay="@style/CornerSize10Percent"
+        bind:small="@{photo}" />
 </layout>

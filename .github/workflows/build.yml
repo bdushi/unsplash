@@ -20,11 +20,11 @@ jobs:
           UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
           UN_OFFICIAL_GITHUB_API_KEY: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
         run: |
-          touch ./local.properties
-          echo UN_SPLASH_API_KEY="$UN_SPLASH_API_KEY" >> ./local.properties
-          echo UN_OFFICIAL_GITHUB_API_KEY="$UN_OFFICIAL_GITHUB_API_KEY" >> ./local.properties
-          echo "cat ./local.properties"
-          cat .Renviron
+          touch local.properties
+          echo UN_SPLASH_API_KEY="$UN_SPLASH_API_KEY" >> local.properties
+          echo UN_OFFICIAL_GITHUB_API_KEY="$UN_OFFICIAL_GITHUB_API_KEY" >> local.properties
+          echo "cat local.properties"
+          cat .local.properties
       - name: Set Up JDK 17
         uses: actions/setup-java@v2
         with:

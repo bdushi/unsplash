@@ -54,7 +54,7 @@ publishing {
          */
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/bdushi/ShareTheGame")
+            url = uri("https://maven.pkg.github.com/bdushi/unsplash")
             credentials {
                 username = "bdushi"
                 password = System.getenv("UN_OFFICIAL_GITHUB_TOKEN")

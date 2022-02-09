@@ -16,5 +16,5 @@ class MyRxBus @Inject constructor() {
         }
     }
 
-    fun getRxBus() = subject
+    fun getRxBus(): PublishSubject<Search> = subject
 }

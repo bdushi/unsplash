@@ -8,7 +8,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
 
-class DropDownArrayAdapter<T : Selection, VM:ViewDataBinding, VD: ViewDataBinding>(context: Context, private val r: Int, private val d: Int, private val t: Array<T>, private val bindingView: BindingData<T, VM>, private val bindingDropDownView: BindingData<T, VD>) : ArrayAdapter<T>(context, r, t) {
+class DropDownArrayAdapter<T : Selection, VM:ViewDataBinding, VD: ViewDataBinding>(
+    context: Context,
+    private val r: Int,
+    private val d: Int,
+    private val t: Array<T>,
+    private val bindingView: (t: T, vm: VM) -> Unit,
+    private val bindingDropDownView: (t: T, vm: VM) -> Unit) : ArrayAdapter<T>(context, r, t) {
 //    private val themedSpinnerAdapter: ThemedSpinnerAdapter.Helper = ThemedSpinnerAdapter.Helper(context)
     private var selection = -1
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {

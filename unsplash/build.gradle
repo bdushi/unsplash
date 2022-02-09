@@ -5,7 +5,6 @@ plugins {
     id 'maven-publish'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 31
@@ -14,7 +13,6 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 31
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -26,27 +24,29 @@ android {
         }
     }
     buildFeatures {
-        viewBinding = true
         dataBinding true
+    }
+    viewBinding {
+        enabled  = true
     }
     compileOptions {
         // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 }
 
 publishing {
     publications {
-//        bar(MavenPublication) {
-//            groupId 'al.bruno'
-//            artifactId 'un-splash'
-//            version '1.0.0'
-//            artifact("$buildDir/outputs/aar/unsplash-release.aar")
-//        }
+        bar(MavenPublication) {
+            groupId 'al.bruno'
+            artifactId 'un-splash'
+            version '1.0.0'
+            artifact("$buildDir/outputs/aar/unsplash-release.aar")
+        }
     }
     repositories {
         /**
@@ -57,7 +57,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/bdushi/ShareTheGame")
             credentials {
                 username = "bdushi"
-                password = "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"
+                password = System.getenv("UN_OFFICIAL_GITHUB_API_KEY")
             }
         }
     }
@@ -76,8 +76,8 @@ dependencies {
 
     // Retrofit
     api libs.retrofit
-    implementation libs.converter.gson
-    implementation libs.logging.interceptor
+    api libs.converter.gson
+    api libs.logging.interceptor
 
     api libs.dagger2
     kapt libs.dagger2.compiler

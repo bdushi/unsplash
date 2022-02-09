@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="photo"
+            type="al.bruno.un.splash.model.api.Photo" />
+        <variable
+            name="onClick"
+            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.api.Photo&gt;" />
+    </data>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        bind:layout_constraintBottom_toBottomOf="parent"
+        bind:layout_constraintRight_toRightOf="parent"
+        bind:layout_constraintLeft_toLeftOf="parent"
+        bind:layout_constraintTop_toTopOf="parent"
+        android:onClick="@{(v) -> onClick.onClick(photo)}"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_margin="4dp"
+        bind:shapeAppearanceOverlay="@style/CornerSize10Percent"
+        bind:small="@{photo}" />
+</layout>

@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
 }
-apply plugin: 'kotlin-android'
+
 android {
     compileSdk 31
     namespace 'al.bruno.unsplash'
@@ -31,7 +31,10 @@ android {
         jvmTarget = '11'
     }
     buildFeatures {
-        viewBinding true
+        dataBinding true
+    }
+    viewBinding {
+        enabled  = true
     }
     compileOptions {
         // Flag to enable support for the new language APIs
@@ -40,6 +43,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    signingConfigs {
+        release {
+            storeFile file('../un-official')
+            storePassword System.getenv("STORED_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
 }
 
 dependencies {

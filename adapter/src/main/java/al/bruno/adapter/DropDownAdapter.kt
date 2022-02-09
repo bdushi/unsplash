@@ -18,7 +18,7 @@ import androidx.databinding.ViewDataBinding
 class DropDownAdapter<T : Selection?, VM : ViewDataBinding>(
     private val resource: Int,
     private val t: Array<T>,
-    private val bindingInterface: BindingData<T, VM>
+    private val bindingData: (t: T, vm: VM) -> Unit
 ) : BaseAdapter(), Filterable {
     private var selection = -1
     override fun getView(position: Int, view: View?, parent: ViewGroup): View? {
@@ -27,7 +27,7 @@ class DropDownAdapter<T : Selection?, VM : ViewDataBinding>(
 //            val themedSpinnerAdapter = ThemedSpinnerAdapter.Helper(parent.context)
 //            contentView = themedSpinnerAdapter.dropDownViewInflater.inflate(resource, parent, false)
             contentView = LayoutInflater.from(parent.context).inflate(resource, parent, false)
-            val spinnerViewHolder = ViewHolderAdapter(contentView, bindingInterface)
+            val spinnerViewHolder = ViewHolderAdapter(contentView, bindingData)
             spinnerViewHolder.bind(t[position])
             contentView.tag = spinnerViewHolder
         } else {

@@ -2,8 +2,6 @@ package al.bruno.un.splash.ui.search
 
 import al.bruno.di.ViewModelKey
 import al.bruno.di.factory.ViewModelProviderFactory
-import al.bruno.un.splash.ui.un.splash.home.UnSplashHomeViewModel
-import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds

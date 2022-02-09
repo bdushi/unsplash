@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimen_10">10dp</dimen>
+    <dimen name="user_profile_photo_min_height">112dp</dimen>
+    <dimen name="user_profile_photo_max_height">132dp</dimen>
 </resources>

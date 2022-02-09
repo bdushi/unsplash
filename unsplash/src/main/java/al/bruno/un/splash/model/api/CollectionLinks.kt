@@ -7,4 +7,9 @@ package al.bruno.un.splash.model.api
  * "related": "https://api.unsplash.com/collections/296/related"
  */
 
-data class CollectionLinks (val self: String, val html: String, val photos: String, val related: String)
+data class CollectionLinks(
+    val self: String,
+    val html: String,
+    val photos: String,
+    val related: String
+)

@@ -15,4 +15,7 @@
     <string name="un_splash_photo">Photo</string>
     <string name="un_splash_collection">Collection</string>
     <string name="un_splash_user">User</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="total_photos">%d Photos</string>
 </resources>

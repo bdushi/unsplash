@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 
 class CustomListAdapter<T, VM: ViewDataBinding>(
     private val r: Int,
-    private val bindingData: BindingData<T, VM>,
+    private val bindingData: (t: T, vm: VM) -> Unit,
     diffUtil: DiffUtil.ItemCallback<T>) : ListAdapter<T, CustomViewHolder<T, VM>>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder<T, VM> {

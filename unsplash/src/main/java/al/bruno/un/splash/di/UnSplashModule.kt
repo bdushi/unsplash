@@ -1,6 +1,10 @@
 package al.bruno.un.splash.di
 
+import al.bruno.un.splash.BuildConfig
+import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
+import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
+import al.bruno.un.splash.data.source.remote.service.UnSplashUserService
 import al.bruno.un.splash.utils.MyRxBus
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -40,7 +44,7 @@ class UnSplashModule {
                                 .newBuilder()
                                 .addHeader(
                                     "Authorization",
-                                    "Client-ID 6ba7be9129630ab29d203a38b66cad0c4aa04824372fc92c849ec486f4ed70e9"
+                                    "Client-ID ${BuildConfig.UN_SPLASH_API_KEY}"
                                 )
                                 .build()
                         )
@@ -56,7 +60,25 @@ class UnSplashModule {
 
     @Provides
     @Reusable
-    fun searchService(retrofit: Retrofit): UnSplashSearchService {
+    fun searchUnSplashSearchService(retrofit: Retrofit): UnSplashSearchService {
         return retrofit.create(UnSplashSearchService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashPhotoService(retrofit: Retrofit): UnSplashPhotoService {
+        return retrofit.create(UnSplashPhotoService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashCollectionService(retrofit: Retrofit): UnSplashCollectionService {
+        return retrofit.create(UnSplashCollectionService::class.java)
+    }
+
+    @Provides
+    @Reusable
+    fun searchUnSplashUserService(retrofit: Retrofit): UnSplashUserService{
+        return retrofit.create(UnSplashUserService::class.java)
     }
 }

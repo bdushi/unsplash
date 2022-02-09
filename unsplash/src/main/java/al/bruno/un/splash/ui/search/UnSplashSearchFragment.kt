@@ -52,6 +52,9 @@ class UnSplashSearchFragment: BaseFragment() {
                 }
             }
         }
+        binding?.unSplashToolbar?.setNavigationOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
         TabLayoutMediator(
             binding!!.unSplashTabLayout,
             binding!!.unSplashViewPager
@@ -68,6 +71,7 @@ class UnSplashSearchFragment: BaseFragment() {
             if (i == KeyEvent.ACTION_DOWN /*&& keyEvent?.keyCode == KeyEvent.KEYCODE_SEARCH*/) {
                 search.query = textView.text
                 myRxBusSearch.setRxBus(search)
+                activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -76,9 +80,9 @@ class UnSplashSearchFragment: BaseFragment() {
         binding?.unSplashTextInput?.isFocusable = true
         binding?.unSplashTextInput?.requestFocus()
 
-//        if (activitySearchBinding.unSplashTextInput.requestFocus() && activitySearchBinding.unSplashTextInput.text.toString() == "") {
-//            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-//        }
+        if (binding?.unSplashTextInput?.requestFocus() == true && binding?.unSplashTextInput?.text?.toString() == "") {
+            activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        }
     }
 
     override fun onDestroyView() {

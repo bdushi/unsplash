@@ -1,5 +1,7 @@
 package al.bruno.un.splash.ui.un.splash.photo
 
+import PHOTO
+import al.bruno.adapter.OnClickListener
 import al.bruno.adapter.PagedListAdapter
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
@@ -8,6 +10,8 @@ import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
 import al.bruno.un.splash.model.api.Photo
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,9 +29,14 @@ class PhotoFragment : BaseFragment() {
 
     private val adapter by lazy {
         PagedListAdapter(
-            R.layout.photo_single_item,
-            { t: Photo, vm: PhotoSingleItemBinding ->
+            R.layout.photo_single_item, { t: Photo, vm: PhotoSingleItemBinding ->
                 vm.photo = t
+                vm.onClick = object : OnClickListener<Photo> {
+                    override fun onClick(t: Photo) {
+                        activity?.setResult(Activity.RESULT_OK, Intent().putExtra(PHOTO, t.urls.regular))
+                        activity?.finish()
+                    }
+                }
             },
             object : DiffUtil.ItemCallback<Photo>() {
                 override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean =

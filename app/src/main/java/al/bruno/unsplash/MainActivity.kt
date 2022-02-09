@@ -31,7 +31,9 @@ class MainActivity : BaseActivity() {
                 return intent?.getStringExtra(PHOTO)
             }
         }) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,7 @@ class MainActivity : BaseActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.unSplash.setOnClickListener {
-            startActivity(Intent(this@MainActivity, UnSplashActivity::class.java))
+            activityResult.launch(Intent(this@MainActivity, UnSplashActivity::class.java))
         }
         binding.unSplashSearch.setOnClickListener {
             activityResult.launch(Intent(this@MainActivity, UnSplashSearchActivity::class.java))

@@ -57,6 +57,7 @@ class UnSplashFragment : BaseFragment() {
                     parentFragmentManager
                         .beginTransaction()
                         .replace(R.id.un_splash_root, UnSplashSearchFragment(), "TAG")
+                        .addToBackStack("TAG")
                         .commit()
                     true
                 }

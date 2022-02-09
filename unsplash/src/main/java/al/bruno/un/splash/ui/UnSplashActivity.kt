@@ -15,9 +15,4 @@ class UnSplashActivity : BaseActivity() {
             .replace(activitySearchBinding.unSplashRoot.id, UnSplashFragment(), "TAG")
             .commit()
     }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
-    }
 }

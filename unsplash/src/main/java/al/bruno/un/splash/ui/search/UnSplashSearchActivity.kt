@@ -2,7 +2,7 @@ package al.bruno.un.splash.ui.search
 
 import al.bruno.di.base.BaseActivity
 import al.bruno.un.splash.R
-import al.bruno.un.splash.databinding.ActivitySearchBinding
+import al.bruno.un.splash.databinding.ActivityUnSplashSearchBinding
 import al.bruno.un.splash.model.api.Search
 import al.bruno.un.splash.ui.search.collection.SearchCollectionFragment
 import al.bruno.un.splash.ui.search.photo.SearchPhotoFragment
@@ -26,8 +26,11 @@ class UnSplashSearchActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activitySearchBinding = ActivitySearchBinding.inflate(layoutInflater)
+        val activitySearchBinding = ActivityUnSplashSearchBinding.inflate(layoutInflater)
         setContentView(activitySearchBinding.root)
+        activitySearchBinding.unSplashToolbar.setNavigationOnClickListener {
+            finish()
+        }
         activitySearchBinding.unSplashViewPager.isUserInputEnabled = false
         activitySearchBinding.unSplashViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
@@ -60,6 +63,7 @@ class UnSplashSearchActivity : BaseActivity() {
             if (i == KeyEvent.ACTION_DOWN /*&& keyEvent?.keyCode == KeyEvent.KEYCODE_SEARCH*/) {
                 search.query = textView.text
                 myRxBusSearch.setRxBus(search)
+                window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -71,10 +75,5 @@ class UnSplashSearchActivity : BaseActivity() {
         if (activitySearchBinding.unSplashTextInput.requestFocus() && activitySearchBinding.unSplashTextInput.text.toString() == "") {
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
     }
 }

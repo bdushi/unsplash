@@ -1,14 +1,17 @@
 package al.bruno.un.splash.ui.un.splash
 
+import al.bruno.un.splash.ui.search.SearchFragmentBuilderModule
 import al.bruno.un.splash.ui.un.splash.collections.CollectionsFragment
 import al.bruno.un.splash.ui.un.splash.photo.PhotoFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class UnSplashFragmentBuilderModule {
+abstract class UnSplashFragmentBuilderModule : SearchFragmentBuilderModule() {
     @ContributesAndroidInjector
-    internal abstract fun contributeHomeFragment(): PhotoFragment
+    abstract fun contributeHomeFragment(): PhotoFragment
     @ContributesAndroidInjector
-    internal abstract fun contributeCollectionsFragment(): CollectionsFragment
+    abstract fun contributeCollectionsFragment(): CollectionsFragment
+    @ContributesAndroidInjector
+    abstract fun contributeUnSplashFragment(): UnSplashFragment
 }

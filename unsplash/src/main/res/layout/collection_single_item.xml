@@ -7,6 +7,10 @@
         <variable
             name="collection"
             type="al.bruno.un.splash.model.api.Collection" />
+
+        <variable
+            name="onClick"
+            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.api.Collection&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

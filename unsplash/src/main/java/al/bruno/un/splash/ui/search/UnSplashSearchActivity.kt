@@ -1,18 +1,13 @@
 package al.bruno.un.splash.ui.search
 
-import PHOTO
-import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseActivity
 import al.bruno.un.splash.R
 import al.bruno.un.splash.databinding.ActivitySearchBinding
-import al.bruno.un.splash.model.api.Photo
 import al.bruno.un.splash.model.api.Search
 import al.bruno.un.splash.ui.search.collection.SearchCollectionFragment
 import al.bruno.un.splash.ui.search.photo.SearchPhotoFragment
 import al.bruno.un.splash.ui.search.user.SearchUserFragment
 import al.bruno.un.splash.utils.MyRxBus
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.WindowManager
@@ -23,20 +18,16 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
-class SearchActivity : BaseActivity() {
+class UnSplashSearchActivity : BaseActivity() {
     @Inject
     lateinit var myRxBusSearch: MyRxBus
 
-    lateinit var activitySearchBinding: ActivitySearchBinding
-
-    val search = Search(null, null)
+    val search = Search(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activitySearchBinding = ActivitySearchBinding.inflate(layoutInflater)
+        val activitySearchBinding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(activitySearchBinding.root)
-        setSupportActionBar(activitySearchBinding.unSplashToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         activitySearchBinding.unSplashViewPager.isUserInputEnabled = false
         activitySearchBinding.unSplashViewPager.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
@@ -45,12 +36,7 @@ class SearchActivity : BaseActivity() {
 
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    0 -> SearchPhotoFragment().setOnClickListener(object : OnClickListener<Photo> {
-                        override fun onClick(t: Photo) {
-                            setResult(Activity.RESULT_OK, Intent().putExtra(PHOTO, t.urls.regular))
-                            finish()
-                        }
-                    })
+                    0 -> SearchPhotoFragment()
                     1 -> SearchCollectionFragment()
                     2 -> SearchUserFragment()
                     else -> SearchPhotoFragment()

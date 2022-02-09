@@ -1,6 +1,7 @@
 package al.bruno.un.splash.ui.search
 
 import al.bruno.di.base.BaseViewModel
+import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
 import al.bruno.un.splash.data.source.UnSplashUserRepository
@@ -33,11 +34,11 @@ class UnSplashSearchViewModel @Inject constructor(
 
     fun searchPhotosPagedList(
         query: CharSequence,
-        orientation: String?
+        orientation: Orientation
     ): Flow<PagingData<Photo>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 30,
+                pageSize = DEFAULT_BUFFER_SIZE,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {

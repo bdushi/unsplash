@@ -5,6 +5,7 @@ import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
+import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
 import al.bruno.un.splash.model.api.Photo
 import android.os.Bundle
@@ -15,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 
 class PhotoFragment : BaseFragment() {
-    private var _binding: FragmentUnSplashBinding? = null
+    private var _binding: FragmentUnSplashPhotoBinding? = null
     private val binding get() = _binding
 
     private val viewModel by lazy {
@@ -38,7 +39,7 @@ class PhotoFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentUnSplashBinding.inflate(inflater)
+        _binding = FragmentUnSplashPhotoBinding.inflate(inflater)
         binding?.adapter = adapter
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = this

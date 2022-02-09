@@ -2,6 +2,7 @@ package al.bruno.un.splash.ui.un.splash
 
 import al.bruno.di.ViewModelKey
 import al.bruno.di.factory.ViewModelProviderFactory
+import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
 import al.bruno.un.splash.ui.un.splash.photo.UnSplashPhotoViewModel
 import al.bruno.un.splash.ui.un.splash.collections.UnSplashCollectionsViewModel
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,11 @@ abstract class UnSplashViewModelModule {
     @IntoMap
     @ViewModelKey(UnSplashPhotoViewModel::class)
     abstract fun bindUnSplashHomeViewModel(unSplashPhotoViewModel: UnSplashPhotoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UnSplashSearchViewModel::class)
+    abstract fun bindUnSplashSearchViewModel(unSplashPhotoViewModel: UnSplashSearchViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -14,7 +14,7 @@ class UnSplashedSearchPhotoPagingSource(
     private val error: StateFlow<String?>,
     private val loading: StateFlow<Boolean>,
     private val query: CharSequence,
-    private val orientation: String?
+    private val orientation: Orientation
 ) : PagingSource<Int, Photo>() {
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -28,7 +28,7 @@ class UnSplashedSearchPhotoPagingSource(
         return try {
             when (val response = unSplashSearchDataSource.searchPhotos(
                 query = query,
-                orientation = Orientation.all,
+                orientation = orientation,
                 page = position,
                 perPage = params.loadSize
             )) {

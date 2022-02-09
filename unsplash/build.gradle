@@ -41,12 +41,12 @@ android {
 
 publishing {
     publications {
-//        bar(MavenPublication) {
-//            groupId 'al.bruno'
-//            artifactId 'un-splash'
-//            version '1.0.0'
-//            artifact("$buildDir/outputs/aar/unsplash-release.aar")
-//        }
+        bar(MavenPublication) {
+            groupId 'al.bruno'
+            artifactId 'un-splash'
+            version '1.0.0'
+            artifact("$buildDir/outputs/aar/unsplash-release.aar")
+        }
     }
     repositories {
         /**
@@ -57,7 +57,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/bdushi/ShareTheGame")
             credentials {
                 username = "bdushi"
-                password = System.getenv("GITHUB_API_KEY")
+                password = System.getenv("UN_OFFICIAL_GITHUB_API_KEY")
             }
         }
     }

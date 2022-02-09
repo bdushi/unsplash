@@ -44,7 +44,7 @@ class UnSplashModule {
                                 .newBuilder()
                                 .addHeader(
                                     "Authorization",
-                                    BuildConfig.UN_SPLASH_API_KEY
+                                    "Client-ID ${BuildConfig.UN_SPLASH_API_KEY}"
                                 )
                                 .build()
                         )

@@ -17,8 +17,12 @@ jobs:
           fetch-depth: 0
       - name: Load Google Api Key from secrets
         env:
-          APP_CENTER_SECRET: ${{ secrets.GOOGLE_API_KEY }}
-        run: echo GOOGLE_API_KEY=\"GOOGLE_API_KEY\" > ./local.properties
+          UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
+          UN_OFFICIAL_GITHUB_API_KEY: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
+        run: |
+          touch ./local.properties
+          echo UN_SPLASH_API_KEY="$UN_SPLASH_API_KEY" > ./local.properties
+          echo UN_OFFICIAL_GITHUB_API_KEY="$UN_OFFICIAL_GITHUB_API_KEY" > ./local.properties
 
       - name: Set Up JDK 17
         uses: actions/setup-java@v2
@@ -54,27 +58,20 @@ jobs:
           tag_name: ${{ steps.version.outputs.commits }}
           release_name: Release v.1.${{ steps.version.outputs.commits }}
         env:
-          GITHUB_TOKEN: ${{ secrets.SHARE_THE_GAME_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
       - name: Publish package
         uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
         with:
           arguments: publish
         env:
-          GITHUB_TOKEN: ${{ secrets.SHARE_THE_GAME_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY  }}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.SHARE_THE_GAME_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.sign.outputs.signedReleaseFile }}
           asset_name: signed-app.apk
           asset_content_type: application/zip
-      - name: Upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
-        with:
-          appId: ${{ secrets.APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: QA
-          file: app/build/outputs/apk/release/app-release-unsigned.apk

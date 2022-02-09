@@ -18,11 +18,11 @@ jobs:
       - name: Load Google Api Key from secrets
         env:
           UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
-          UN_OFFICIAL_GITHUB_API_KEY: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
+          UN_OFFICIAL_GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
         run: |
           touch local.properties
           echo UN_SPLASH_API_KEY="$UN_SPLASH_API_KEY" >> local.properties
-          echo UN_OFFICIAL_GITHUB_API_KEY="$UN_OFFICIAL_GITHUB_API_KEY" >> local.properties
+          echo UN_OFFICIAL_GITHUB_TOKEN="$UN_OFFICIAL_GITHUB_TOKEN" >> local.properties
           echo "cat local.properties"
           cat local.properties
       - name: Set Up JDK 17
@@ -59,18 +59,18 @@ jobs:
           tag_name: ${{ steps.version.outputs.commits }}
           release_name: Release v.1.${{ steps.version.outputs.commits }}
         env:
-          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
       - name: Publish package
         uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
         with:
           arguments: publish
         env:
-          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY  }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.sign.outputs.signedReleaseFile }}

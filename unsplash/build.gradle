@@ -57,7 +57,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/bdushi/ShareTheGame")
             credentials {
                 username = "bdushi"
-                password = System.getenv("UN_OFFICIAL_GITHUB_API_KEY")
+                password = System.getenv("UN_OFFICIAL_GITHUB_TOKEN")
             }
         }
     }

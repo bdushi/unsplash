@@ -66,7 +66,8 @@ publishing {
             url = uri('https://maven.pkg.github.com/bdushi/unsplash')
             credentials {
                 username = 'bdushi'
-                password = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
+                password = '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'
+                // password = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
             }
         }
     }

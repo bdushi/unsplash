@@ -62,6 +62,8 @@ jobs:
         uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
         with:
           arguments: publish
+        run:
+          cat local.properties
         env:
           GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
       - name: Upload Release APK

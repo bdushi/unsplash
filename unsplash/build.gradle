@@ -66,6 +66,8 @@ afterEvaluate {
             /**
              * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
              */
+            println "GITHUB_TOKEN: ${System.getenv('UN_OFFICIAL_GITHUB_TOKEN')}"
+            println "GITHUB_TOKEN: ${properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')}"
             maven {
                 name = 'GitHubPackages'
                 url = uri('https://maven.pkg.github.com/bdushi/unsplash')
@@ -73,6 +75,8 @@ afterEvaluate {
                     username = 'bdushi'
                     password = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
                 }
+                println "GITHUB_TOKEN: ${System.getenv('UN_OFFICIAL_GITHUB_TOKEN')}"
+                println "GITHUB_TOKEN: ${properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')}"
             }
         }
     }

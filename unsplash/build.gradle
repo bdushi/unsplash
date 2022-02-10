@@ -47,11 +47,6 @@ afterEvaluate {
         /**
          * https://gist.github.com/dhei/38cbc9b79f5f442d0d2f11106a76662d
          */
-        Properties properties = new Properties()
-        File file = rootProject.file('local.properties')
-        if (file.exists()) {
-            properties.load(file.newDataInputStream())
-        }
         publications {
             release(MavenPublication) {
                 // Applies the component for the release build variant.
@@ -61,20 +56,18 @@ afterEvaluate {
                 groupId 'al.bruno'
                 artifactId 'un-official'
                 version '1.0.0'
-//                artifact("$buildDir/outputs/aar/unsplash-release.aar")
             }
         }
         repositories {
             /**
              * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
              */
-            println "GITHUB_TOKEN: ${System.getenv('UN_OFFICIAL_GITHUB_TOKEN')}"
             maven {
                 name = 'GitHubPackages'
                 url = uri('https://maven.pkg.github.com/bdushi/unsplash')
                 credentials {
                     username = 'bdushi'
-                    password = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
+                    password = System.getenv('UN_OFFICIAL_GITHUB_TOKEN')
                 }
             }
         }

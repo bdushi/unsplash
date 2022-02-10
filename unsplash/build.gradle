@@ -46,6 +46,8 @@ afterEvaluate {
     publishing {
         /**
          * https://gist.github.com/dhei/38cbc9b79f5f442d0d2f11106a76662d
+         *
+         * https://docs.gradle.org/current/userguide/publishing_maven.html
          */
         Properties properties = new Properties()
         File file = rootProject.file('local.properties')
@@ -67,7 +69,7 @@ afterEvaluate {
              * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
              */
             def token = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
-            println "UN_OFFICIAL_GITHUB_TOKEN: ${token}"
+            println token
             maven {
                 name = 'GitHubPackages'
                 url = uri('https://maven.pkg.github.com/bdushi/unsplash')

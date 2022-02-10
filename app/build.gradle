@@ -46,7 +46,7 @@ android {
     signingConfigs {
         release {
             storeFile file('../un-official')
-            storePassword System.getenv('STORED_PASSWORD')
+            storePassword System.getenv('STORE_PASSWORD')
             keyAlias System.getenv('KEY_ALIAS')
             keyPassword System.getenv('KEY_PASSWORD')
             v1SigningEnabled true

@@ -59,9 +59,9 @@ afterEvaluate {
                 // Applies the component for the release build variant.
                 from components.release
                 // Publication attributes.
-                groupId 'al.bruno'
-                artifactId 'un-official'
-                version '1.0.0'
+                groupId "al.bruno"
+                artifactId "un-official"
+                version "1.0.0"
             }
         }
         repositories {
@@ -71,10 +71,10 @@ afterEvaluate {
             def token = project.findProperty("UN_OFFICIAL_GITHUB_TOKEN")//properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
             println token
             maven {
-                name = 'GitHubPackages'
-                url = uri('https://maven.pkg.github.com/bdushi/unsplash')
+                name = "GitHubPackages"
+                url = "https://maven.pkg.github.com/bdushi/unsplash"
                 credentials {
-                    username = 'bdushi'
+                    username = "bdushi"
                     password = token
                 }
             }

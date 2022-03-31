@@ -60,7 +60,8 @@ afterEvaluate {
                 from components.release
                 // Publication attributes.
                 groupId "al.bruno"
-                artifactId "un-official"
+//                artifactId "un-official"
+                artifactId "unsplash"
                 version "1.0.0"
             }
         }
@@ -68,14 +69,12 @@ afterEvaluate {
             /**
              * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
              */
-            def token = project.findProperty("UN_OFFICIAL_GITHUB_TOKEN")//properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
-            println token
             maven {
                 name = "GitHubPackages"
                 url = "https://maven.pkg.github.com/bdushi/unsplash"
                 credentials {
                     username = "bdushi"
-                    password = token
+                    password = properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
                 }
             }
         }

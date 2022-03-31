@@ -68,7 +68,7 @@ afterEvaluate {
             /**
              * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
              */
-            def token = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
+            def token = project.findProperty("UN_OFFICIAL_GITHUB_TOKEN")//properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
             println token
             maven {
                 name = 'GitHubPackages'

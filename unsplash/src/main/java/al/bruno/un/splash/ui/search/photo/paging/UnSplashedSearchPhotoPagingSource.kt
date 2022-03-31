@@ -7,12 +7,13 @@ import al.bruno.un.splash.model.api.Photo
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class UnSplashedSearchPhotoPagingSource(
-    private val unSplashSearchDataSource: UnSplashSearchRepository,
-    private val error: StateFlow<String?>,
-    private val loading: StateFlow<Boolean>,
+    private val unSplashSearchRepository: UnSplashSearchRepository,
+    private val error: MutableStateFlow<String?>,
+    private val loading: MutableStateFlow<Boolean>,
     private val query: CharSequence,
     private val orientation: Orientation
 ) : PagingSource<Int, Photo>() {
@@ -25,17 +26,20 @@ class UnSplashedSearchPhotoPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: 1
+        loading.value = true
         return try {
-            when (val response = unSplashSearchDataSource.searchPhotos(
+            when (val response = unSplashSearchRepository.searchPhotos(
                 query = query,
                 orientation = orientation,
                 page = position,
                 perPage = params.loadSize
             )) {
                 is Result.Error -> {
+                    loading.value = false
                     LoadResult.Error(Throwable(response.exception))
                 }
                 is Result.Success -> {
+                    loading.value = false
                     LoadResult.Page(
                         data = response.data.results,
                         prevKey = if (position == 1) null else position - 1,
@@ -43,6 +47,7 @@ class UnSplashedSearchPhotoPagingSource(
                     )
                 }
                 else -> {
+                    loading.value = false
                     LoadResult.Error(Throwable())
                 }
             }

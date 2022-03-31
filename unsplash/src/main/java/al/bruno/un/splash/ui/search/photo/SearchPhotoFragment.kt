@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -66,6 +67,7 @@ class SearchPhotoFragment : BaseFragment() {
         _binding = FragmentUnSplashPhotoBinding.inflate(layoutInflater)
         binding?.adapter = adapter
         binding?.viewModel = viewModel
+        binding?.refreshListener = SwipeRefreshLayout.OnRefreshListener { adapter.retry() }
         binding?.lifecycleOwner = this
         return binding?.root
     }

@@ -76,8 +76,6 @@ afterEvaluate {
                     username = "bdushi"
                     password = properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
                 }
-                println 'UN_OFFICIAL_GITHUB_TOKEN'
-                println properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
             }
         }
     }

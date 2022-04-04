@@ -74,8 +74,10 @@ afterEvaluate {
                 url = "https://maven.pkg.github.com/bdushi/unsplash"
                 credentials {
                     username = "bdushi"
-                    password = properties["UN_OFFICIAL_GITHUB_TOKEN"]
+                    password = properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
                 }
+                println 'UN_OFFICIAL_GITHUB_TOKEN'
+                println properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
             }
         }
     }

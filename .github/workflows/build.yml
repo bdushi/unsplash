@@ -15,14 +15,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Load Api Key from secrets and write to local.properties
+        # Load Api Key from secrets and write to local.properties
+      - name: Load UnSplash ApiKey from secrets and write to local.properties
         env:
           UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
+        run: echo UN_SPLASH_API_KEY = \"$UN_SPLASH_API_KEY\" >> ./local.properties
+      - name: Load Github ApiKey from secrets and write to local.properties
+        env:
           UN_OFFICIAL_GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
-        run: |
-          echo UN_SPLASH_API_KEY = \"$UN_SPLASH_API_KEY\" >> ./local.properties
-          echo UN_OFFICIAL_GITHUB_TOKEN = \"$UN_OFFICIAL_GITHUB_TOKEN\" >> ./local.properties
-          cat ./local.properties
+        run: echo UN_OFFICIAL_GITHUB_TOKEN = \"$UN_OFFICIAL_GITHUB_TOKEN\" >> ./local.properties
       - name: Set Up JDK 17
         uses: actions/setup-java@v2
         with:

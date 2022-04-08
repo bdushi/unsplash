@@ -6,6 +6,10 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdkVersion 32
     buildToolsVersion '31.0.0'
@@ -74,7 +78,9 @@ afterEvaluate {
                 url = "https://maven.pkg.github.com/bdushi/unsplash"
                 credentials {
                     username = "bdushi"
-                    password = System.getenv("UN_OFFICIAL_GITHUB_TOKEN")//properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
+//                    password = properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
+//                    password = System.getenv("UN_OFFICIAL_GITHUB_TOKEN")
+                    password = githubProperties['UN_OFFICIAL_GITHUB_TOKEN']
                 }
             }
         }

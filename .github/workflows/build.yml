@@ -31,6 +31,11 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Execute Gradle build
+        run: ./gradlew build
+
       - name: Build the app
         run: ./gradlew assembleRelease --stacktrace
       - name: Sign APK

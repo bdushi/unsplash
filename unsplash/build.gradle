@@ -56,6 +56,8 @@ android {
 afterEvaluate {
     publishing {
         /**
+         * https://developer.android.com/studio/publish-library
+         *
          * https://gist.github.com/dhei/38cbc9b79f5f442d0d2f11106a76662d
          *
          * https://docs.gradle.org/current/userguide/publishing_maven.html
@@ -69,6 +71,7 @@ afterEvaluate {
 //                artifactId "un-official"
                 artifactId "unsplash"
                 version "1.0.0"
+                artifact "$buildDir/outputs/aar/unsplash-release.aar"
             }
         }
         repositories {

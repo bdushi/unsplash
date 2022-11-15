@@ -71,7 +71,7 @@ afterEvaluate {
 //                artifactId "un-official"
                 artifactId "unsplash"
                 version "1.0.0"
-                artifact "$buildDir/outputs/aar/unsplash-release.aar"
+//                artifact "$buildDir/outputs/aar/unsplash-release.aar"
             }
         }
         repositories {

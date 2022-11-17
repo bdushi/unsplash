@@ -75,7 +75,7 @@ afterEvaluate {
                 groupId "al.bruno"
                 artifactId "unsplash"
                 version "1.0.0"
-                artifact "$buildDir/outputs/aar/unsplash-release.aar" {
+                artifact ("$buildDir/outputs/aar/unsplash-release.aar") {
                     builtBy "assembleRelease"
                 }
                 artifact androidSourcesJar

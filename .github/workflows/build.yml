@@ -5,10 +5,22 @@ on:
   push:
     branches:
       - main
+env:
+  UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
+  UN_OFFICIAL_GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
+  SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+  ALIAS: ${{ secrets.ALIAS }}
+  STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        java: [ 17 ]
 
     steps:
       - name: Checkout the code
@@ -17,45 +29,48 @@ jobs:
           fetch-depth: 0
         # Load Api Key from secrets and write to local.properties
       - name: Load UnSplash ApiKey from secrets and write to local.properties
-        env:
-          UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
-        run: echo UN_SPLASH_API_KEY = \"$UN_SPLASH_API_KEY\" >> ./local.properties
+        run: echo UN_SPLASH_API_KEY = "$UN_SPLASH_API_KEY" >> ./local.properties
+
       - name: Load Github ApiKey from secrets and write to local.properties
-        env:
-          UN_OFFICIAL_GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
         run: echo UN_OFFICIAL_GITHUB_TOKEN = \"$UN_OFFICIAL_GITHUB_TOKEN\" >> ./local.properties
-      - name: Set Up JDK 17
+
+      - name: Set Up JDK ${{ matrix.java }}
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
+          java-version: ${{ matrix.java }}
           distribution: 'temurin'
           cache: gradle
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+
       - name: Execute Gradle build
         run: ./gradlew build
 
       - name: Build the app
         run: ./gradlew assembleRelease --stacktrace
+
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         # ID used to access action output
         id: sign
         with:
           releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: release.apk
-          path: ${{steps.sign.outputs.signedReleaseFile}}
+          signingKeyBase64: ${{ env.SIGNING_KEY }}
+          alias: ${{ env.ALIAS }}
+          keyStorePassword: ${{ env.STORE_PASSWORD }}
+          keyPassword: ${{ env.KEY_PASSWORD }}
+
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: release.apk
+#          path: ${{steps.sign.outputs.signedReleaseFile}}
+
       - name: Get App version code
         id: version
         run: |
           echo "::set-output name=commits::$(git rev-list --count HEAD)"
+
       - name: Release
         id: create_release
         uses: actions/create-release@v1
@@ -69,13 +84,14 @@ jobs:
 #        run: |
 #          cat local.properties
       - name: Publish package
-        run: ./gradlew :unsplash:publish
+        run: ./gradlew :unsplash:publishToGithubPackages
 #        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
 #        uses:  actions/upload-artifact@v3
 #        with:
 #          arguments: publish
         env:
           GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
+
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1

@@ -21,8 +21,8 @@ class MainActivity : BaseActivity() {
 
     private val activityResult =
         registerForActivityResult(object : ActivityResultContract<Intent, String?>() {
-            override fun createIntent(context: Context, intent: Intent): Intent {
-                return intent
+            override fun createIntent(context: Context, input: Intent): Intent {
+                return input
             }
             override fun parseResult(resultCode: Int, intent: Intent?): String? {
                 if (resultCode != Activity.RESULT_OK) {

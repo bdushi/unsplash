@@ -1,6 +1,5 @@
 package al.bruno.un.splash.di
 
-import al.bruno.un.splash.BuildConfig
 import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
 import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
@@ -44,7 +43,7 @@ class UnSplashModule {
                                 .newBuilder()
                                 .addHeader(
                                     "Authorization",
-                                    "Client-ID ${BuildConfig.UN_SPLASH_API_KEY}"
+                                    "Client-ID AHV-LsEDHkDfDQqA8__oTuHPto3coSeP-GGnJVBAMxA"
                                 )
                                 .build()
                         )

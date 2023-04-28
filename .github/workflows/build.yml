@@ -110,7 +110,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: unsplash
-          path: app/build/outputs/aar/unsplash-release.aar
+          path: unsplash/build/outputs/aar/unsplash-release.aar
 
 #      - name: Publish AAR to GitHub Packages
 #        env:

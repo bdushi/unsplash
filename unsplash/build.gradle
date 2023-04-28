@@ -6,13 +6,24 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
+
+def properties = new Properties()
+properties.load(new FileInputStream(rootProject.file("local.properties")))
+
+
+//Properties properties = new Properties()
+//File file = rootProject.file('local.properties')
+//if (file.exists()) {
+//    properties.load(file.newDataInputStream())
+//}
+
 android {
-    compileSdkVersion 31
-    buildToolsVersion '31.0.0'
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
     namespace 'al.bruno.un.splash'
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -30,53 +41,40 @@ android {
         enabled  = true
     }
     compileOptions {
-        // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_19
+        targetCompatibility JavaVersion.VERSION_19
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "19"
     }
 }
 
-/**
- * https://developer.android.com/studio/build/maven-publish-plugin
- */
-afterEvaluate {
-    publishing {
+publishing {
+    /**
+     * https://developer.android.com/studio/publish-library
+     *
+     * https://gist.github.com/dhei/38cbc9b79f5f442d0d2f11106a76662d
+     *
+     * https://docs.gradle.org/current/userguide/publishing_maven.html
+     */
+    publications {
+        release(MavenPublication) {
+            groupId "al.bruno"
+            artifactId "unsplash"
+            version "1.0.0"
+            artifact "$buildDir/outputs/aar/unsplash-release.aar"
+        }
+    }
+    repositories {
         /**
-         * https://gist.github.com/dhei/38cbc9b79f5f442d0d2f11106a76662d
-         *
-         * https://docs.gradle.org/current/userguide/publishing_maven.html
+         * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
          */
-        Properties properties = new Properties()
-        File file = rootProject.file('local.properties')
-        if (file.exists()) {
-            properties.load(file.newDataInputStream())
-        }
-        publications {
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-                // Publication attributes.
-                groupId 'al.bruno'
-                artifactId 'un-official'
-                version '1.0.0'
-            }
-        }
-        repositories {
-            /**
-             * https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
-             */
-            def token = project.findProperty("UN_OFFICIAL_GITHUB_TOKEN")//properties.getProperty("UN_OFFICIAL_GITHUB_TOKEN")
-            println token
-            maven {
-                name = 'GitHubPackages'
-                url = uri('https://maven.pkg.github.com/bdushi/unsplash')
-                credentials {
-                    username = 'bdushi'
-                    password = token
-                }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/bdushi/unsplash")
+            credentials {
+                username = "bdushi"
+                password = properties.getProperty('UN_OFFICIAL_GITHUB_TOKEN')
             }
         }
     }

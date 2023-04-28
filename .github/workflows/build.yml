@@ -100,12 +100,20 @@ jobs:
 #          arguments: publish
 #        run: ./gradlew publish
 #        run: ./gradlew :unsplash:publishReleasePublicationToGitHubPackagesRepository
+
       - name: Publish package
         uses:  actions/upload-artifact@v3
         with:
           arguments: publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
+        run: ./gradlew publish
+#        run: ./gradlew :unsplash:publishReleasePublicationToGitHubPackagesRepository
+
+#      - name: Publish package
+#        uses:  actions/upload-artifact@v3
+#        with:
+#          arguments: publish
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
 
 #      - name: Publish AAR to GitHub Packages
 #        uses: actions/upload-artifact@v3

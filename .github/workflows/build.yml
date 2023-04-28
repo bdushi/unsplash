@@ -106,16 +106,13 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
 
-#      - name: Publish AAR to GitHub Packages
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: unsplash
-#          path: app/build/outputs/aar/unsplash-release.aar
-
       - name: Publish AAR to GitHub Packages
         uses: actions/upload-artifact@v3
         with:
-          arguments: publish
+          name: unsplash
+          path: unsplash/build/outputs/aar/unsplash-release.aar
+
+      - name: Publish AAR to GitHub Packages
         env:
           GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
         run: ./gradlew publish

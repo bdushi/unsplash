@@ -111,11 +111,11 @@ jobs:
         with:
           name: unsplash
           path: unsplash/build/outputs/aar/unsplash-release.aar
-
-      - name: Publish AAR to GitHub Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
         run: ./gradlew publish
+
+#      - name: Publish AAR to GitHub Packages
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
 
       - name: Upload Release APK
         id: upload_release_asset

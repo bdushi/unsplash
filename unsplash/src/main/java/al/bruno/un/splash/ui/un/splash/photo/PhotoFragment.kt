@@ -9,7 +9,7 @@ import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.data.source.model.Photo
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle

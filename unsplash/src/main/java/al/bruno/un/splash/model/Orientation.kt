@@ -1,4 +1,4 @@
-package al.bruno.un.splash.common
+package al.bruno.un.splash.model
 
 enum class Orientation {
     landscape,

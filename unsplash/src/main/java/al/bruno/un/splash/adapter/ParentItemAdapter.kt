@@ -1,7 +1,7 @@
 package al.bruno.un.splash.adapter
 
 import androidx.paging.PagingDataAdapter
-import al.bruno.un.splash.dto.UsersPhoto
+import al.bruno.un.splash.model.UsersPhoto
 import androidx.recyclerview.widget.DiffUtil
 import android.view.ViewGroup
 

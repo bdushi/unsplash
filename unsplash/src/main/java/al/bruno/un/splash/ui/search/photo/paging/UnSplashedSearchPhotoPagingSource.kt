@@ -1,21 +1,18 @@
 package al.bruno.un.splash.ui.search.photo.paging
 
-import al.bruno.un.splash.common.Orientation
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
-import al.bruno.un.splash.model.api.Photo
-import androidx.lifecycle.MutableLiveData
+import al.bruno.un.splash.data.source.model.Photo
+import al.bruno.un.splash.model.Search
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class UnSplashedSearchPhotoPagingSource(
     private val unSplashSearchRepository: UnSplashSearchRepository,
     private val error: MutableStateFlow<String?>,
     private val loading: MutableStateFlow<Boolean>,
-    private val query: CharSequence,
-    private val orientation: Orientation
+    private val search: Search
 ) : PagingSource<Int, Photo>() {
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -29,8 +26,8 @@ class UnSplashedSearchPhotoPagingSource(
         loading.value = true
         return try {
             when (val response = unSplashSearchRepository.searchPhotos(
-                query = query,
-                orientation = orientation,
+                query = search.query,
+                orientation = search.orientation,
                 page = position,
                 perPage = params.loadSize
             )) {

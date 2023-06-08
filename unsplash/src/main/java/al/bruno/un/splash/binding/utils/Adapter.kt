@@ -6,9 +6,9 @@ package al.bruno.un.splash.binding.utils
  * https://betterprogramming.pub/aspect-ratio-with-constraint-layout-with-constraintdimensionratio-d55828ec4aae
  */
 
-import al.bruno.un.splash.model.api.Collection
-import al.bruno.un.splash.model.api.Photo
-import al.bruno.un.splash.model.api.ProfileImage
+import al.bruno.un.splash.data.source.model.Collection
+import al.bruno.un.splash.data.source.model.Photo
+import al.bruno.un.splash.data.source.model.ProfileImage
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.imageview.ShapeableImageView

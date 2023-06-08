@@ -3,7 +3,7 @@ package al.bruno.un.splash.ui.search.user.paging
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
 import al.bruno.un.splash.data.source.UnSplashUserRepository
-import al.bruno.un.splash.dto.UsersPhoto
+import al.bruno.un.splash.model.UsersPhoto
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 

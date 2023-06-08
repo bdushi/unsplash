@@ -1,4 +1,4 @@
-package al.bruno.un.splash.model.api
+package al.bruno.un.splash.data.source.model
 
 /**
  * "raw": "https://images.unsplash.com/photo-1417325384643-aac51acc9e5d",

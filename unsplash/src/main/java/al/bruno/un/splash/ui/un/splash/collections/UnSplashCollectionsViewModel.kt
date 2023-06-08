@@ -2,7 +2,7 @@ package al.bruno.un.splash.ui.un.splash.collections
 
 import al.bruno.di.base.BaseViewModel
 import al.bruno.un.splash.data.source.UnSplashCollectionRepository
-import al.bruno.un.splash.model.api.Collection
+import al.bruno.un.splash.data.source.model.Collection
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData

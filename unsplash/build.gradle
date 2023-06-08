@@ -101,9 +101,6 @@ dependencies {
     implementation libs.dagger2.android
     implementation libs.dagger2.android.support
     kapt libs.dagger2.processor
-    // RxJava
-    implementation libs.rxjava3
-    implementation libs.rxjava3.android
 
     // Picasso
     api libs.picasso

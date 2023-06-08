@@ -4,7 +4,6 @@ import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
 import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.data.source.remote.service.UnSplashUserService
-import al.bruno.un.splash.utils.MyRxBus
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -20,13 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class UnSplashModule {
-
-    @Provides
-    @Singleton
-    fun providesMyRxBus(): MyRxBus {
-        return MyRxBus()
-    }
-
     @Provides
     @Singleton
     fun providerRetrofit(): Retrofit {

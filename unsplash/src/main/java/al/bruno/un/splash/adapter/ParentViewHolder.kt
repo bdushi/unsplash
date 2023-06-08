@@ -2,10 +2,10 @@ package al.bruno.un.splash.adapter
 
 import al.bruno.adapter.CustomListAdapter
 import al.bruno.un.splash.R
+import al.bruno.un.splash.data.source.model.Photo
 import al.bruno.un.splash.databinding.UnSplashUserItemBinding
 import al.bruno.un.splash.databinding.UsersPhotoSingleItemBinding
-import al.bruno.un.splash.dto.UsersPhoto
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.model.UsersPhoto
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

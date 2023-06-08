@@ -4,7 +4,7 @@
     <data>
         <variable
             name="user"
-            type="al.bruno.un.splash.model.api.User" />
+            type="al.bruno.un.splash.data.source.model.User" />
         <variable
             name="adapter"
             type="al.bruno.adapter.CustomListAdapter" />

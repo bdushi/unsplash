@@ -1,13 +1,8 @@
 package al.bruno.un.splash.data.source
 
-import al.bruno.un.splash.common.Orientation
+import al.bruno.un.splash.model.Orientation
 import al.bruno.un.splash.common.Result
-import al.bruno.un.splash.model.api.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import al.bruno.un.splash.data.source.model.*
 import java.lang.Exception
 import javax.inject.Inject
 

@@ -1,6 +1,6 @@
 package al.bruno.un.splash.data.source.remote.service
 
-import al.bruno.un.splash.model.api.Collection
+import al.bruno.un.splash.data.source.model.Collection
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -2,7 +2,7 @@ package al.bruno.un.splash.ui.un.splash.photo
 
 import al.bruno.di.base.BaseViewModel
 import al.bruno.un.splash.data.source.UnSplashPhotoRepository
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.data.source.model.Photo
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData

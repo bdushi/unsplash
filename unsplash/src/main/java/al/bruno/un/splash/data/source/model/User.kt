@@ -1,4 +1,4 @@
-package al.bruno.un.splash.model.api
+package al.bruno.un.splash.data.source.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -64,6 +64,6 @@ data class User(
     @SerializedName("accepted_tos") val acceptedTos: Boolean,
     @SerializedName("for_hire") val forHire: Boolean,
     val downloads: Int,
-    val badge: Badge,
+    val badge: al.bruno.un.splash.data.source.model.Badge,
     val social: Social
 )

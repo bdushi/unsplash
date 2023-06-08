@@ -62,7 +62,9 @@ class UnSplashFragment : BaseFragment() {
                     true
                 }
                 R.id.action_filter -> {
-                    MaterialAlertDialogBuilder(requireContext()).show()
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    ).show()
                     true
                 }
                 else ->

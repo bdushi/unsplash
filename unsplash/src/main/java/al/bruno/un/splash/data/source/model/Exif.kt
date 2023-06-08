@@ -1,4 +1,4 @@
-package al.bruno.un.splash.model.api
+package al.bruno.un.splash.data.source.model
 
 /**
  * "make": "Canon",

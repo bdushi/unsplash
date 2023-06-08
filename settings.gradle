@@ -14,9 +14,10 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         libs {
+
             version('kotlin', '1.8.21')
             version('paging', '3.2.0-alpha04')
-            version('dagger', '2.45')
+            version('dagger', '2.46.1')
             version('datastore', '1.1.0-alpha01')
             version('retrofit', '2.9.0')
             version('rxjava3', '3.1.3')
@@ -39,18 +40,12 @@ dependencyResolutionManagement {
              */
             library('paging3', 'androidx.paging', 'paging-runtime').versionRef('paging')
             library('paging3-common', 'androidx.paging', 'paging-common-ktx').versionRef('paging')
-            library('paging3-rxjava3', 'androidx.paging', 'paging-rxjava3').versionRef('paging')
             /**
-             *
+             * Data Store
              */
             library('datastore-core', 'androidx.datastore', 'datastore-core').versionRef('datastore')
             library('datastore-preferences', 'androidx.datastore', 'datastore-preferences').versionRef('datastore')
             library('protobuf', 'com.google.protobuf:protobuf-javalite:3.22.3')
-            /**
-             * RxJava3
-             */
-            library('rxjava3', 'io.reactivex.rxjava3', 'rxjava').versionRef('rxjava3')
-            library('rxjava3-android', 'io.reactivex.rxjava3', 'rxandroid').versionRef('rxjava3-android')
             /**
              * Retrofit Version Catalog
              */

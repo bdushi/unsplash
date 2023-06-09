@@ -1,15 +1,16 @@
 package al.bruno.un.splash.ui.un.splash.photo
 
 import PHOTO
+import al.bruno.adapter.LoadStateAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.adapter.PagedListAdapter
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
-import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
 import al.bruno.un.splash.data.source.model.Photo
+import al.bruno.un.splash.databinding.LoadStateItemViewBinding
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +28,13 @@ class PhotoFragment : BaseFragment() {
         ViewModelProvider(this, viewModelProvider)[UnSplashPhotoViewModel::class.java]
     }
 
+    private val propertiesLoadStateAdapter =
+        LoadStateAdapter<LoadStateItemViewBinding>(R.layout.load_state_item_view) { loadState, vm ->
+            vm.loadState = loadState
+            vm.onClick = View.OnClickListener {
+                adapter.retry()
+            }
+        }
     private val adapter by lazy {
         PagedListAdapter(
             R.layout.photo_single_item, { t: Photo, vm: PhotoSingleItemBinding ->
@@ -49,9 +57,10 @@ class PhotoFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentUnSplashPhotoBinding.inflate(inflater)
-        binding?.adapter = adapter
-        binding?.viewModel = viewModel
-        binding?.lifecycleOwner = this
+        binding?.unSplash?.adapter = adapter.withLoadStateHeaderAndFooter(
+            footer = propertiesLoadStateAdapter,
+            header = propertiesLoadStateAdapter
+        )
         return _binding?.root
     }
 

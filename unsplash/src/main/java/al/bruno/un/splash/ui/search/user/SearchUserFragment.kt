@@ -1,10 +1,12 @@
 package al.bruno.un.splash.ui.search.user
 
+import al.bruno.adapter.LoadStateAdapter
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.adapter.ParentItemAdapter
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
+import al.bruno.un.splash.databinding.LoadStateItemViewBinding
 import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +22,14 @@ class SearchUserFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
     }
+    private val propertiesLoadStateAdapter =
+        LoadStateAdapter<LoadStateItemViewBinding>(R.layout.load_state_item_view) { loadState, vm ->
+            vm.loadState = loadState
+            vm.onClick = View.OnClickListener {
+                adapter.retry()
+            }
+        }
+
     private val adapter by lazy {
         ParentItemAdapter(R.layout.un_splash_user_item)
     }
@@ -30,9 +40,10 @@ class SearchUserFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUnSplashPhotoBinding.inflate(inflater)
-        binding?.adapter = adapter
-        binding?.viewModel = viewModel
-        binding?.lifecycleOwner = this
+        binding?.unSplash?.adapter = adapter.withLoadStateHeaderAndFooter(
+            footer = propertiesLoadStateAdapter,
+            header = propertiesLoadStateAdapter
+        )
         return _binding?.root
     }
 

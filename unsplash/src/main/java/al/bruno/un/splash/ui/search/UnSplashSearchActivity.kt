@@ -11,18 +11,16 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.WindowManager
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.AndroidInjector
 
 class UnSplashSearchActivity : BaseActivity() {
-
-//    private val viewModel by lazy {
-//        ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
-//    }
+    private val unsplash = arrayListOf(SearchPhotoFragment(), SearchCollectionFragment(), SearchUserFragment())
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +31,9 @@ class UnSplashSearchActivity : BaseActivity() {
         }
         activitySearchBinding.unSplashViewPager.isUserInputEnabled = false
         activitySearchBinding.unSplashViewPager.adapter = object : FragmentStateAdapter(this) {
-            override fun getItemCount(): Int {
-                return 3
-            }
+            override fun getItemCount() = unsplash.size
 
-            override fun createFragment(position: Int): Fragment {
-                return when (position) {
-                    0 -> SearchPhotoFragment()
-                    1 -> SearchCollectionFragment()
-                    2 -> SearchUserFragment()
-                    else -> SearchPhotoFragment()
-                }
-            }
+            override fun createFragment(position: Int) = unsplash[position]
         }
         TabLayoutMediator(
             activitySearchBinding.unSplashTabLayout,
@@ -53,15 +42,9 @@ class UnSplashSearchActivity : BaseActivity() {
             tab.text = resources.getStringArray(R.array.un_splash_tabs)[position]
         }.attach()
 
-        activitySearchBinding.unSplashViewPager.offscreenPageLimit = 2
-        activitySearchBinding.unSplashViewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            // TODO
-        })
-
         activitySearchBinding.unSplashTextInput.setOnEditorActionListener { textView: TextView, i: Int, keyEvent: KeyEvent? ->
             if (i == KeyEvent.ACTION_DOWN /*&& keyEvent?.keyCode == KeyEvent.KEYCODE_SEARCH*/) {
-//                viewModel.search.value = Search(textView.text)
+                viewModel.search.value = Search(textView.text)
                 window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
                 return@setOnEditorActionListener true
             }

@@ -82,6 +82,9 @@ publishing {
 
 dependencies {
     implementation libs.appcompat
+    implementation libs.fragment
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
     implementation libs.android.core
     implementation libs.google.android.material
     implementation libs.lifecycle

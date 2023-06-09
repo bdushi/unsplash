@@ -30,10 +30,6 @@ class UnSplashSearchViewModel @Inject constructor(
     private val unSplashSearchRepository: UnSplashSearchRepository,
     private val unSplashUserRepository: UnSplashUserRepository
 ) : BaseViewModel() {
-
-    private val _photos = MutableStateFlow(listOf<Photo>())
-    var photos: StateFlow<List<Photo>> = _photos
-
     val search = MutableStateFlow<Search?>(null)
 
     val result = search
@@ -47,8 +43,6 @@ class UnSplashSearchViewModel @Inject constructor(
                 pagingSourceFactory = {
                     UnSplashedSearchPhotoPagingSource(
                         unSplashSearchRepository,
-                        _error,
-                        _loading,
                         it
                     )
                 }
@@ -104,36 +98,5 @@ class UnSplashSearchViewModel @Inject constructor(
                 )
             }
         ).flow
-    }
-
-    fun photos(username: String) {
-        viewModelScope.launch {
-            try {
-                when (val response = unSplashUserRepository.photos(
-                    username = username,
-                    page = 1,
-                    perPage = 3
-                )) {
-                    is Result.Error -> {
-                        _loading.value = false
-                        _error.value = response.exception
-                    }
-
-                    is Result.Success -> {
-                        _loading.value = false
-                        _photos.value = response.data
-
-                    }
-
-                    is Result.Loading -> {
-                        _loading.value = true
-                    }
-                }
-
-            } catch (ex: Exception) {
-                _loading.value = false
-                _error.value = ex.message
-            }
-        }
     }
 }

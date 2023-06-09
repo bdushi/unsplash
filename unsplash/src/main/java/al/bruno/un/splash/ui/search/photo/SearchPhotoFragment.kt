@@ -1,6 +1,7 @@
 package al.bruno.un.splash.ui.search.photo
 
 import PHOTO
+import al.bruno.adapter.LoadStateAdapter
 import al.bruno.adapter.PagedListAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseFragment
@@ -8,6 +9,7 @@ import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.data.source.model.Photo
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
+import al.bruno.un.splash.databinding.LoadStateItemViewBinding
 import al.bruno.un.splash.databinding.PhotoSingleItemBinding
 import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
 import android.app.Activity
@@ -28,6 +30,14 @@ class SearchPhotoFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
     }
+
+    private val propertiesLoadStateAdapter =
+        LoadStateAdapter<LoadStateItemViewBinding>(R.layout.load_state_item_view) { loadState, vm ->
+            vm.loadState = loadState
+            vm.onClick = View.OnClickListener {
+                adapter.retry()
+            }
+        }
 
     private val adapter by lazy {
         PagedListAdapter(
@@ -56,18 +66,15 @@ class SearchPhotoFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUnSplashPhotoBinding.inflate(layoutInflater)
-        binding?.adapter = adapter
-        binding?.viewModel = viewModel
-        binding?.refreshListener = SwipeRefreshLayout.OnRefreshListener { adapter.retry() }
-        binding?.lifecycleOwner = this
+        binding?.unSplash?.adapter = adapter.withLoadStateHeaderAndFooter(
+            footer = propertiesLoadStateAdapter,
+            header = propertiesLoadStateAdapter
+        )
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collectLatestFlow(viewModel.error) { error ->
-            error?.let { Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show() }
-        }
         collectLatestFlow(
             viewModel.result
         ) {

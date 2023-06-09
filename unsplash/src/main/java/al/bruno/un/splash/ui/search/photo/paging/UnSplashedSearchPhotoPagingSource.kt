@@ -10,8 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class UnSplashedSearchPhotoPagingSource(
     private val unSplashSearchRepository: UnSplashSearchRepository,
-    private val error: MutableStateFlow<String?>,
-    private val loading: MutableStateFlow<Boolean>,
     private val search: Search
 ) : PagingSource<Int, Photo>() {
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {
@@ -23,7 +21,6 @@ class UnSplashedSearchPhotoPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Photo> {
         val position = params.key ?: 1
-        loading.value = true
         return try {
             when (val response = unSplashSearchRepository.searchPhotos(
                 query = search.query,
@@ -32,11 +29,9 @@ class UnSplashedSearchPhotoPagingSource(
                 perPage = params.loadSize
             )) {
                 is Result.Error -> {
-                    loading.value = false
                     LoadResult.Error(Throwable(response.exception))
                 }
                 is Result.Success -> {
-                    loading.value = false
                     LoadResult.Page(
                         data = response.data.results,
                         prevKey = if (position == 1) null else position - 1,
@@ -44,7 +39,6 @@ class UnSplashedSearchPhotoPagingSource(
                     )
                 }
                 else -> {
-                    loading.value = false
                     LoadResult.Error(Throwable())
                 }
             }

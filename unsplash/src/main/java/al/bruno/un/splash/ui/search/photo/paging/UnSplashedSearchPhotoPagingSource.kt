@@ -2,11 +2,11 @@ package al.bruno.un.splash.ui.search.photo.paging
 
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
-import al.bruno.un.splash.data.source.model.Photo
+import al.bruno.un.splash.model.Photo
 import al.bruno.un.splash.model.Search
+import al.bruno.un.splash.model.Urls
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class UnSplashedSearchPhotoPagingSource(
     private val unSplashSearchRepository: UnSplashSearchRepository,
@@ -33,7 +33,7 @@ class UnSplashedSearchPhotoPagingSource(
                 }
                 is Result.Success -> {
                     LoadResult.Page(
-                        data = response.data.results,
+                        data = response.data.results.map { photo -> Photo(photo.id, Urls(photo.urls.raw, photo.urls.full, photo.urls.regular, photo.urls.small, photo.urls.thumb), photo.width.toFloat(), photo.width.toFloat()) },
                         prevKey = if (position == 1) null else position - 1,
                         nextKey = if (response.data.results.isEmpty()) null else position + 1
                     )

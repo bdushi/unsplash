@@ -7,8 +7,8 @@ package al.bruno.un.splash.binding.utils
  */
 
 import al.bruno.un.splash.data.source.model.Collection
-import al.bruno.un.splash.data.source.model.Photo
 import al.bruno.un.splash.data.source.model.ProfileImage
+import al.bruno.un.splash.model.Photo
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.imageview.ShapeableImageView
@@ -21,7 +21,7 @@ object Adapter {
     @BindingAdapter("bind:small")
     fun imageSmallProvider(imageView: ShapeableImageView, photo: Photo) {
         val finalHeight =
-            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width.toFloat() / photo.height.toFloat())
+            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width / photo.height)
         imageView.minimumHeight = finalHeight.toInt()
         Picasso
             .get()
@@ -33,11 +33,20 @@ object Adapter {
     @BindingAdapter("bind:image")
     fun imageProvider(imageView: AppCompatImageView, photo: Photo) {
         val finalHeight =
-            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width.toFloat() / photo.height.toFloat())
+            (imageView.resources.displayMetrics.widthPixels * 2) / (photo.width / photo.height)
         imageView.minimumHeight = finalHeight.toInt()
         Picasso
             .get()
             .load(photo.urls.regular)
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("bind:image")
+    fun imageSmallProvider(imageView: ShapeableImageView, url: String) {
+        Picasso
+            .get()
+            .load(url)
             .into(imageView)
     }
 

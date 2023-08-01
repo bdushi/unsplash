@@ -14,8 +14,7 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         libs {
-
-            version('kotlin', '1.8.21')
+            version('kotlin', '1.9.0')
             version('paging', '3.2.0-alpha04')
             version('dagger', '2.46.1')
             version('datastore', '1.1.0-alpha01')
@@ -30,6 +29,7 @@ dependencyResolutionManagement {
             version('appcompat', '1.7.0-alpha02')
             version('fragment', '1.6.0')
             version('core', '1.9.0')
+            version('epoxy', '5.1.3')
             library('kotlin-stdlib', 'org.jetbrains.kotlin', 'kotlin-stdlib').versionRef('kotlin')
             library('appcompat', 'androidx.appcompat','appcompat').versionRef('appcompat')
             library('fragment', 'androidx.fragment','fragment-ktx').versionRef('fragment')
@@ -57,20 +57,25 @@ dependencyResolutionManagement {
             library('datastore-preferences', 'androidx.datastore', 'datastore-preferences').versionRef('datastore')
             library('protobuf', 'com.google.protobuf:protobuf-javalite:3.22.3')
             /**
-             * Retrofit Version Catalog
+             * Retrofit
              */
             library('retrofit', 'com.squareup.retrofit2', 'retrofit').versionRef('retrofit')
             library('converter-gson', 'com.squareup.retrofit2', 'converter-gson').versionRef('retrofit')
             library('logging-interceptor', 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3')
             library('picasso', 'com.squareup.picasso', 'picasso').versionRef('picasso')
             /**
-             * Dagger Version Catalog
+             * Dagger
              */
             library('dagger2', 'com.google.dagger', 'dagger').versionRef('dagger')
             library('dagger2-compiler', 'com.google.dagger', 'dagger-compiler').versionRef('dagger')
             library('dagger2-android', 'com.google.dagger', 'dagger-android').versionRef('dagger')
             library('dagger2-android-support', 'com.google.dagger', 'dagger-android-support').versionRef('dagger')
             library('dagger2-processor', 'com.google.dagger', 'dagger-android-processor').versionRef('dagger')
+
+            library('epoxy', 'com.airbnb.android', 'epoxy').versionRef('epoxy')
+            library('epoxy-processor', 'com.airbnb.android', 'epoxy-processor').versionRef('epoxy')
+            library('epoxy-databinding', 'com.airbnb.android', 'epoxy-databinding').versionRef('epoxy')
+            library('epoxy-paging', 'com.airbnb.android', 'epoxy-paging3').versionRef('epoxy')
             /**
              * Test Version Catalog
              */

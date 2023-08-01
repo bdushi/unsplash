@@ -64,6 +64,6 @@ data class User(
     @SerializedName("accepted_tos") val acceptedTos: Boolean,
     @SerializedName("for_hire") val forHire: Boolean,
     val downloads: Int,
-    val badge: al.bruno.un.splash.data.source.model.Badge,
+    val badge: Badge?,
     val social: Social
 )

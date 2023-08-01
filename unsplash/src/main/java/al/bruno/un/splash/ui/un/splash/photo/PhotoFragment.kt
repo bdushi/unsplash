@@ -8,9 +8,9 @@ import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
-import al.bruno.un.splash.databinding.PhotoSingleItemBinding
-import al.bruno.un.splash.data.source.model.Photo
 import al.bruno.un.splash.databinding.LoadStateItemViewBinding
+import al.bruno.un.splash.databinding.UnSplashPhotoItemBinding
+import al.bruno.un.splash.model.Photo
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -37,7 +37,7 @@ class PhotoFragment : BaseFragment() {
         }
     private val adapter by lazy {
         PagedListAdapter(
-            R.layout.photo_single_item, { t: Photo, vm: PhotoSingleItemBinding ->
+            R.layout.un_splash_photo_item, { t: Photo, vm: UnSplashPhotoItemBinding ->
                 vm.photo = t
                 vm.onClick = object : OnClickListener<Photo> {
                     override fun onClick(t: Photo) {

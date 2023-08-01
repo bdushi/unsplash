@@ -1,7 +1,7 @@
 package al.bruno.un.splash.ui.search
 
+import DEFAULT_PAGE_SIZE
 import al.bruno.di.base.BaseViewModel
-import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashSearchRepository
 import al.bruno.un.splash.data.source.UnSplashUserRepository
 import al.bruno.un.splash.data.source.model.Photo
@@ -10,17 +10,14 @@ import al.bruno.un.splash.ui.search.collection.paging.UnSplashSearchCollectionPa
 import al.bruno.un.splash.ui.search.photo.paging.UnSplashedSearchPhotoPagingSource
 import al.bruno.un.splash.ui.search.user.paging.UnSplashSearchUserPagingSource
 import al.bruno.un.splash.ui.search.user.paging.UnSplashUserPhotoPagingSource
-import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,7 +34,7 @@ class UnSplashSearchViewModel @Inject constructor(
         .flatMapLatest {
             Pager(
                 config = PagingConfig(
-                    pageSize = DEFAULT_BUFFER_SIZE,
+                    pageSize = DEFAULT_PAGE_SIZE,
                     enablePlaceholders = false
                 ),
                 pagingSourceFactory = {
@@ -54,7 +51,7 @@ class UnSplashSearchViewModel @Inject constructor(
         .flatMapLatest {
             Pager(
                 config = PagingConfig(
-                    pageSize = DEFAULT_BUFFER_SIZE,
+                    pageSize = DEFAULT_PAGE_SIZE,
                     enablePlaceholders = true
                 ),
                 pagingSourceFactory = {
@@ -72,7 +69,7 @@ class UnSplashSearchViewModel @Inject constructor(
         .flatMapLatest {
             Pager(
                 config = PagingConfig(
-                    pageSize = DEFAULT_BUFFER_SIZE,
+                    pageSize = DEFAULT_PAGE_SIZE,
                     enablePlaceholders = true
                 ),
                 pagingSourceFactory = {
@@ -88,7 +85,7 @@ class UnSplashSearchViewModel @Inject constructor(
     fun photo(username: String): Flow<PagingData<Photo>> {
         return Pager(
             config = PagingConfig(
-                pageSize = DEFAULT_BUFFER_SIZE,
+                pageSize = DEFAULT_PAGE_SIZE,
                 enablePlaceholders = true
             ),
             pagingSourceFactory = {

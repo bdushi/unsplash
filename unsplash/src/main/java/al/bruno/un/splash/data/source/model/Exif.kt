@@ -9,9 +9,11 @@ package al.bruno.un.splash.data.source.model
  * "iso": 100
  */
 
-data class Exif(var make: String,
-                var model: String,
-                var exposure_time: String,
-                var aperture: String,
-                var focal_length: String,
-                var iso: Int)
+data class Exif(
+    var make: String,
+    var model: String,
+    var exposure_time: String,
+    var aperture: String,
+    var focal_length: String,
+    var iso: Int
+)

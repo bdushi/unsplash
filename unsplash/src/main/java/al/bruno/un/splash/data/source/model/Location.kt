@@ -11,8 +11,10 @@ package al.bruno.un.splash.data.source.model
  * }
  */
 
-data class Location(val title: String,
-                    val name: String,
-                    val city: String,
-                    val country: String,
-                    val position: Position)
+data class Location(
+    val title: String,
+    val name: String,
+    val city: String,
+    val country: String,
+    val position: Position
+)

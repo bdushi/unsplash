@@ -18,12 +18,11 @@ properties.load(new FileInputStream(rootProject.file("local.properties")))
 //}
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '33.0.0'
+    compileSdkVersion 34
     namespace 'al.bruno.un.splash'
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -47,6 +46,9 @@ android {
     kotlinOptions {
         jvmTarget = "19"
     }
+}
+kapt {
+    correctErrorTypes = true
 }
 
 publishing {
@@ -94,7 +96,9 @@ dependencies {
     api project(path: ':di')
     api project(path: ':adapter')
 
-    // Retrofit
+    /**
+     * Retrofit
+     */
     api libs.retrofit
     api libs.converter.gson
     api libs.logging.interceptor
@@ -104,9 +108,17 @@ dependencies {
     implementation libs.dagger2.android
     implementation libs.dagger2.android.support
     kapt libs.dagger2.processor
-
-    // Picasso
+    /**
+     * Picasso
+     */
     api libs.picasso
+    /**
+     * epoxy
+     */
+    implementation libs.epoxy
+    implementation libs.epoxy.databinding
+    implementation libs.epoxy.paging
+    kapt libs.epoxy.processor
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.test

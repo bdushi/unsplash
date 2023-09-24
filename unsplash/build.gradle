@@ -10,8 +10,8 @@ android {
     compileSdk 34
     namespace 'al.bruno.un.splash'
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -32,7 +32,6 @@ android {
         enabled  = true
     }
     compileOptions {
-        // Sets Java compatibility to Java 8
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -86,6 +85,9 @@ afterEvaluate {
 
 dependencies {
     implementation libs.appcompat
+    implementation libs.fragment
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
     implementation libs.android.core
     implementation libs.google.android.material
     implementation libs.lifecycle
@@ -105,12 +107,16 @@ dependencies {
     implementation libs.dagger2.android
     implementation libs.dagger2.android.support
     kapt libs.dagger2.processor
-    // RxJava
-    implementation libs.rxjava3
-    implementation libs.rxjava3.android
-
     // Picasso
     api libs.picasso
+
+    /**
+     * epoxy
+     */
+    implementation libs.epoxy
+    implementation libs.epoxy.databinding
+    implementation libs.epoxy.paging
+    kapt libs.epoxy.processor
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.test

@@ -38,7 +38,6 @@ android {
 dependencies {
     api libs.recyclerview
     api libs.paging3
-    api libs.paging3.rxjava3
     testImplementation libs.paging3.common
     testImplementation libs.junit
     androidTestImplementation libs.ext.test

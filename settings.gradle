@@ -14,72 +14,80 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         libs {
-            version('kotlin', '1.9.0')
-            version('compose', '1.2.0-alpha01')
-            version('paging', '3.1.0')
-            version('dagger', '2.39.1')
-            version('datastore', '1.0.0')
+            version('kotlin', '1.9.10')
+            version('paging', '3.2.0-alpha04')
+            version('dagger', '2.46.1')
+            version('datastore', '1.1.0-alpha01')
             version('retrofit', '2.9.0')
-            version('rxjava3', '3.1.3')
-            version('rxjava3-android', '3.0.0')
             version('picasso', '2.8')
-            version('viewpager', '1.0.0')
-            version('swiperefreshlayout', '1.0.0')
-            version('recyclerview', '1.2.1')
-
+            version('viewpager', '1.1.0-alpha01')
+            version('swiperefreshlayout', '1.2.0-alpha01')
+            version('recyclerview', '1.3.0')
+            version('navigation', '2.6.0')
+            version('appcompat', '1.7.0-alpha02')
+            version('fragment', '1.6.0')
+            version('core', '1.9.0')
+            version('epoxy', '5.1.3')
             /**
              *
              */
             plugin('android-application', 'com.android.application').version('8.1.0')
             plugin('android-library', 'com.android.library').version('8.1.0')
             plugin('kotlin-android', 'org.jetbrains.kotlin.android').version('1.9.10')
-            plugin('kotlin-jvm', 'org.jetbrains.kotlin.jvm').version('1.9.10')
             plugin('google-maps-secrets', 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin').version('2.0.1')
 
             /**
              * Common
              */
             library('kotlin-stdlib', 'org.jetbrains.kotlin', 'kotlin-stdlib').versionRef('kotlin')
-            library('appcompat', 'androidx.appcompat:appcompat:1.4.0')
-            library('android-core', 'androidx.core:core-ktx:1.7.0')
-            library('lifecycle', 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0')
-            library('google-android-material', 'com.google.android.material:material:1.6.0-alpha02')
+            library('appcompat', 'androidx.appcompat','appcompat').versionRef('appcompat')
+            library('fragment', 'androidx.fragment','fragment-ktx').versionRef('fragment')
+            library('android-core', 'androidx.core','core-ktx').versionRef('core')
+            library('lifecycle', 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-beta01')
+            library('google-android-material', 'com.google.android.material:material:1.9.0-rc01')
             library('viewpager2', 'androidx.viewpager2', 'viewpager2').versionRef('viewpager')
             library('recyclerview', 'androidx.recyclerview', 'recyclerview').versionRef('recyclerview')
             library('swiperefreshlayout', 'androidx.swiperefreshlayout', 'swiperefreshlayout').versionRef('swiperefreshlayout')
+
+            /**
+             * Navigation
+             */
+            library('navigation-fragment', 'androidx.navigation', 'navigation-fragment-ktx').versionRef('navigation')
+            library('navigation-ui', 'androidx.navigation', 'navigation-ui-ktx').versionRef('navigation')
             /**
              * Paging
              */
             library('paging3', 'androidx.paging', 'paging-runtime').versionRef('paging')
             library('paging3-common', 'androidx.paging', 'paging-common-ktx').versionRef('paging')
-            library('paging3-rxjava3', 'androidx.paging', 'paging-rxjava3').versionRef('paging')
             /**
-             *
+             * Data Store
              */
-            library('desugar_jdk_libs', 'com.android.tools:desugar_jdk_libs:1.1.5')
             library('datastore-core', 'androidx.datastore', 'datastore-core').versionRef('datastore')
             library('datastore-preferences', 'androidx.datastore', 'datastore-preferences').versionRef('datastore')
-            library('protobuf', 'com.google.protobuf:protobuf-javalite:3.14.0')
+            library('protobuf', 'com.google.protobuf:protobuf-javalite:3.22.3')
             /**
-             * RxJava3
-             */
-            library('rxjava3', 'io.reactivex.rxjava3', 'rxjava').versionRef('rxjava3')
-            library('rxjava3-android', 'io.reactivex.rxjava3', 'rxandroid').versionRef('rxjava3-android')
-            /**
-             * Retrofit Version Catalog
+             * Retrofit
              */
             library('retrofit', 'com.squareup.retrofit2', 'retrofit').versionRef('retrofit')
             library('converter-gson', 'com.squareup.retrofit2', 'converter-gson').versionRef('retrofit')
             library('logging-interceptor', 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3')
             library('picasso', 'com.squareup.picasso', 'picasso').versionRef('picasso')
             /**
-             * Dagger Version Catalog
+             * Dagger
              */
             library('dagger2', 'com.google.dagger', 'dagger').versionRef('dagger')
             library('dagger2-compiler', 'com.google.dagger', 'dagger-compiler').versionRef('dagger')
             library('dagger2-android', 'com.google.dagger', 'dagger-android').versionRef('dagger')
             library('dagger2-android-support', 'com.google.dagger', 'dagger-android-support').versionRef('dagger')
             library('dagger2-processor', 'com.google.dagger', 'dagger-android-processor').versionRef('dagger')
+
+            /**
+             * airbnb epoxy
+             */
+            library('epoxy', 'com.airbnb.android', 'epoxy').versionRef('epoxy')
+            library('epoxy-processor', 'com.airbnb.android', 'epoxy-processor').versionRef('epoxy')
+            library('epoxy-databinding', 'com.airbnb.android', 'epoxy-databinding').versionRef('epoxy')
+            library('epoxy-paging', 'com.airbnb.android', 'epoxy-paging3').versionRef('epoxy')
             /**
              * Test Version Catalog
              */

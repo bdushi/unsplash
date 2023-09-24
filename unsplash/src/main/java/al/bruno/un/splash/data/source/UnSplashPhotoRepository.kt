@@ -1,7 +1,7 @@
 package al.bruno.un.splash.data.source
 
 import al.bruno.un.splash.common.Result
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.data.source.model.Photo
 import javax.inject.Inject
 
 class UnSplashPhotoRepository @Inject constructor(private val unSplashPhotoDataSource: UnSplashPhotoDataSource) {

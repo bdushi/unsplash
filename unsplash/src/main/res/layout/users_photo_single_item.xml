@@ -5,10 +5,10 @@
     <data>
         <variable
             name="photo"
-            type="al.bruno.un.splash.model.api.Photo" />
+            type="al.bruno.un.splash.model.Photo" />
         <variable
             name="onClick"
-            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.api.Photo&gt;" />
+            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.Photo&gt;" />
     </data>
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="80dp"

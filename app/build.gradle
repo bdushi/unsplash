@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
     namespace 'al.bruno.unsplash'
     defaultConfig {
         applicationId "al.bruno.unsplash"
         minSdk 21
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -21,6 +21,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -28,7 +29,7 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '19'
     }
     buildFeatures {
         dataBinding true
@@ -37,11 +38,8 @@ android {
         enabled  = true
     }
     compileOptions {
-        // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled true
-        // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_19
+        targetCompatibility JavaVersion.VERSION_19
     }
     signingConfigs {
         release {
@@ -70,8 +68,6 @@ dependencies {
     implementation libs.dagger2.android
     implementation libs.dagger2.android.support
     kapt libs.dagger2.processor
-    // Java 8
-    coreLibraryDesugaring libs.desugar.jdk.libs
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.test

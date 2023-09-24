@@ -4,8 +4,8 @@ import al.bruno.adapter.CustomListAdapter
 import al.bruno.un.splash.R
 import al.bruno.un.splash.databinding.UnSplashUserItemBinding
 import al.bruno.un.splash.databinding.UsersPhotoSingleItemBinding
-import al.bruno.un.splash.dto.UsersPhoto
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.model.Photo
+import al.bruno.un.splash.model.User
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -30,14 +30,14 @@ class ParentViewHolder(
             }
         })
 
-    fun bind(user: UsersPhoto?) {
+    fun bind(user: User?) {
         unSplashUserItemBinding.unSplashUserPhoto.adapter = pagedListAdapter
         unSplashUserItemBinding.unSplashUserPhoto.setRecycledViewPool(recycledViewPool)
         Picasso.get()
-            .load(user?.users?.profileImage?.small)
+            .load(user?.profileUrl)
             .into(unSplashUserItemBinding.unSplashUserProfileImage)
-        unSplashUserItemBinding.unSplashUserName.text = user?.users?.name
-        unSplashUserItemBinding.unSplashUserUsername.text = user?.users?.username
+        unSplashUserItemBinding.unSplashUserName.text = user?.name
+        unSplashUserItemBinding.unSplashUserUsername.text = user?.username
         pagedListAdapter.submitList(user?.photos)
     }
 

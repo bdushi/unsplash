@@ -1,11 +1,10 @@
 package al.bruno.un.splash.data.source.remote
 
-import al.bruno.un.splash.common.Orientation
+import al.bruno.un.splash.model.Orientation
 import al.bruno.un.splash.data.source.UnSplashSearchDataSource
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
-import al.bruno.un.splash.model.api.*
+import al.bruno.un.splash.data.source.model.*
 import javax.inject.Inject
-import retrofit2.Call
 import retrofit2.Response
 
 class UnSplashSearchRemoteDataSource @Inject constructor(private val unSplashSearchService: UnSplashSearchService) : UnSplashSearchDataSource {

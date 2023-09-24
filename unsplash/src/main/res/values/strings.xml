@@ -18,4 +18,5 @@
     <string name="search">Search</string>
     <string name="filter">Filter</string>
     <string name="total_photos">%d Photos</string>
+    <string name="retry">Retry</string>
 </resources>

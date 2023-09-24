@@ -1,8 +1,9 @@
 package al.bruno.un.splash.data.source
 
-import al.bruno.un.splash.common.Orientation
-import al.bruno.un.splash.model.api.*
-import retrofit2.Call
+import al.bruno.un.splash.data.source.model.SearchCollectionsResult
+import al.bruno.un.splash.data.source.model.SearchPhotosResult
+import al.bruno.un.splash.data.source.model.SearchUsersResult
+import al.bruno.un.splash.model.Orientation
 import retrofit2.Response
 
 interface UnSplashSearchDataSource {

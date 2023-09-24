@@ -6,11 +6,11 @@
     <data>
         <variable
             name="collection"
-            type="al.bruno.un.splash.model.api.Collection" />
+            type="al.bruno.un.splash.data.source.model.Collection" />
 
         <variable
             name="onClick"
-            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.model.api.Collection&gt;" />
+            type="al.bruno.adapter.OnClickListener&lt;al.bruno.un.splash.data.source.model.Collection&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

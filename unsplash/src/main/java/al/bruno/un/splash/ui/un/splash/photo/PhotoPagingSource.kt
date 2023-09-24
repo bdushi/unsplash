@@ -2,7 +2,8 @@ package al.bruno.un.splash.ui.un.splash.photo
 
 import al.bruno.un.splash.common.Result
 import al.bruno.un.splash.data.source.UnSplashPhotoRepository
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.model.Photo
+import al.bruno.un.splash.model.Urls
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
@@ -30,7 +31,7 @@ class PhotoPagingSource constructor(
                 }
                 is Result.Success -> {
                     LoadResult.Page(
-                        data = response.data,
+                        data = response.data.map { photo -> Photo(photo.id, Urls(photo.urls.raw, photo.urls.full, photo.urls.regular, photo.urls.small, photo.urls.thumb), photo.width.toFloat(), photo.width.toFloat()) },
                         prevKey = if (position == 1) null else position - 1,
                         nextKey = if (response.data.isEmpty()) null else position + 1
                     )

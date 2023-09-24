@@ -1,9 +1,9 @@
 package al.bruno.un.splash.data.source.remote.service
 
-import al.bruno.un.splash.common.OrderBy
-import al.bruno.un.splash.common.Orientation
-import al.bruno.un.splash.common.Resolution
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.model.OrderBy
+import al.bruno.un.splash.model.Orientation
+import al.bruno.un.splash.model.Resolution
+import al.bruno.un.splash.data.source.model.Photo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

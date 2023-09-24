@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/unsplash"
+    app:startDestination="@id/unSplashFragment">
+
+    <fragment
+        android:id="@+id/unSplashFragment"
+        android:name="al.bruno.un.splash.ui.un.splash.UnSplashFragment"
+        tools:layout="@layout/fragment_un_splash">
+        <action
+            android:id="@+id/action_unSplashFragment_to_unSplashSearchFragment"
+            app:destination="@id/unSplashSearchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/unSplashSearchFragment"
+        android:name="al.bruno.un.splash.ui.search.UnSplashSearchFragment"
+        tools:layout="@layout/fragment_un_splash_search"/>
+</navigation>

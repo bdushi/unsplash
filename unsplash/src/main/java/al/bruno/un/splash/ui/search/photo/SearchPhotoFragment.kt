@@ -1,17 +1,17 @@
 package al.bruno.un.splash.ui.search.photo
 
 import PHOTO
+import al.bruno.adapter.LoadStateAdapter
 import al.bruno.adapter.PagedListAdapter
 import al.bruno.adapter.OnClickListener
 import al.bruno.di.base.BaseFragment
 import al.bruno.un.splash.R
 import al.bruno.un.splash.common.collectLatestFlow
-import al.bruno.un.splash.databinding.FragmentUnSplashBinding
 import al.bruno.un.splash.databinding.FragmentUnSplashPhotoBinding
-import al.bruno.un.splash.databinding.PhotoSingleItemBinding
-import al.bruno.un.splash.model.api.Photo
+import al.bruno.un.splash.databinding.LoadStateItemViewBinding
+import al.bruno.un.splash.databinding.UnSplashPhotoItemBinding
+import al.bruno.un.splash.model.Photo
 import al.bruno.un.splash.ui.search.UnSplashSearchViewModel
-import al.bruno.un.splash.utils.MyRxBus
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -20,28 +20,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.snackbar.Snackbar
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class SearchPhotoFragment : BaseFragment() {
     private var _binding: FragmentUnSplashPhotoBinding? = null
     private val binding get() = _binding
 
-    @Inject
-    lateinit var myRxBusSearch: MyRxBus
-
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelProvider)[UnSplashSearchViewModel::class.java]
     }
 
+    private val propertiesLoadStateAdapter =
+        LoadStateAdapter<LoadStateItemViewBinding>(R.layout.load_state_item_view) { loadState, vm ->
+            vm.loadState = loadState
+            vm.onClick = View.OnClickListener {
+                adapter.retry()
+            }
+        }
+
     private val adapter by lazy {
         PagedListAdapter(
-            R.layout.photo_single_item,
-            { t: Photo, vm: PhotoSingleItemBinding ->
+            R.layout.un_splash_photo_item,
+            { t: Photo, vm: UnSplashPhotoItemBinding ->
                 vm.photo = t
                 vm.onClick = object : OnClickListener<Photo> {
                     override fun onClick(t: Photo) {
@@ -65,44 +64,20 @@ class SearchPhotoFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUnSplashPhotoBinding.inflate(layoutInflater)
-        binding?.adapter = adapter
-        binding?.viewModel = viewModel
-        binding?.refreshListener = SwipeRefreshLayout.OnRefreshListener { adapter.retry() }
-        binding?.lifecycleOwner = this
+        binding?.unSplash?.adapter = adapter.withLoadStateHeaderAndFooter(
+            footer = propertiesLoadStateAdapter,
+            header = propertiesLoadStateAdapter
+        )
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        collectLatestFlow(viewModel.error) { error ->
-            error?.let { Snackbar.make(view, it, Snackbar.LENGTH_SHORT).show() }
+        collectLatestFlow(
+            viewModel.result
+        ) {
+            adapter.submitData(it)
         }
-        myRxBusSearch
-            .getRxBus()
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { search ->
-                    search.query?.let { query ->
-                        collectLatestFlow(
-                            viewModel.searchPhotosPagedList(
-                                query,
-                                search.orientation
-                            )
-                        ) {
-                            adapter.submitData(it)
-                        }
-                    }
-                }, { throwable ->
-                    Snackbar.make(
-                        view,
-                        throwable.message.toString(),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-            )
-            .isDisposed
     }
 
     override fun onDestroyView() {

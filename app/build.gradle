@@ -1,16 +1,16 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    alias libs.plugins.android.application
+    alias libs.plugins.kotlin.android
     id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     namespace 'al.bruno.unsplash'
     defaultConfig {
         applicationId "al.bruno.unsplash"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 

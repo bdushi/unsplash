@@ -1,15 +1,15 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    alias libs.plugins.android.library
+    alias libs.plugins.kotlin.android
     id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     namespace 'al.bruno.adapter'
     defaultConfig {
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }

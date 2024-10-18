@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'al.bruno.un.splash'
     defaultConfig {
-        minSdk 21
-        targetSdk 34
+        minSdk 26
+        targetSdk 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -25,12 +25,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     buildFeatures {
-        dataBinding true
+        buildConfig = true
+        viewBinding = true
+        dataBinding = true
     }
-    viewBinding {
-        enabled  = true
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -109,14 +110,6 @@ dependencies {
     kapt libs.dagger2.processor
     // Picasso
     api libs.picasso
-
-    /**
-     * epoxy
-     */
-    implementation libs.epoxy
-    implementation libs.epoxy.databinding
-    implementation libs.epoxy.paging
-    kapt libs.epoxy.processor
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.test

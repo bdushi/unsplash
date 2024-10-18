@@ -6,7 +6,7 @@ import al.bruno.un.splash.data.source.model.Photo
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
-class UnSplashUserPhotoPagingSource constructor(
+class UnSplashUserPhotoPagingSource(
     private val unSplashUserRepository: UnSplashUserRepository,
     private val username: String): PagingSource<Int, Photo>() {
     override fun getRefreshKey(state: PagingState<Int, Photo>): Int? {

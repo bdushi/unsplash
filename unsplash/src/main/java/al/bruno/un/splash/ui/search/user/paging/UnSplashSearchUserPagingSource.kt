@@ -9,7 +9,7 @@ import al.bruno.un.splash.model.User
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
-class UnSplashSearchUserPagingSource constructor(
+class UnSplashSearchUserPagingSource(
     private val unSplashSearchRepository: UnSplashSearchRepository,
     private val unSplashUserRepository: UnSplashUserRepository,
     private val query: CharSequence

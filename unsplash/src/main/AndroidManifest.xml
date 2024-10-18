@@ -1,1 +1,10 @@
-<manifest/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name="al.bruno.un.splash.ui.UnSplashActivity"
+            android:exported="true"/>
+        <activity
+            android:name="al.bruno.un.splash.ui.search.UnSplashSearchActivity"
+            android:exported="true"/>
+    </application>
+</manifest>

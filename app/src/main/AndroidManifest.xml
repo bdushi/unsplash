@@ -26,11 +26,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="al.bruno.un.splash.ui.UnSplashActivity"
-            android:exported="true"/>
-        <activity
-            android:name="al.bruno.un.splash.ui.search.UnSplashSearchActivity"
-            android:exported="true"/>
     </application>
 </manifest>

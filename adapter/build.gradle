@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
     namespace 'al.bruno.adapter'
     defaultConfig {
-        minSdk 21
-        targetSdk 34
+        minSdk 26
+        targetSdk 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -24,7 +24,8 @@ android {
         }
     }
     buildFeatures {
-        dataBinding true
+        buildConfig = true
+        dataBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

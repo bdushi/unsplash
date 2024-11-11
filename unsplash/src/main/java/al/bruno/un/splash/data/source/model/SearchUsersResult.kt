@@ -1,9 +1,11 @@
 package al.bruno.un.splash.data.source.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SearchUsersResult(
     val total: Int,
-    @SerializedName("total_pages") val total_pages: Int,
+    @SerialName("total_pages") val totalPages: Int,
     val results: List<User>
 )

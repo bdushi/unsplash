@@ -1,11 +1,13 @@
 package al.bruno.un.splash.data.source.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PreviewPhotos(
     val id: String,
-    @SerializedName("created_at") val createdAt: String,
-    @SerializedName("updated_at") val updatedAt: String,
-    @SerializedName("blur_hash") val blurHash: String,
+    @SerialName("created_at") val createdAt: String,
+    @SerialName("updated_at") val updatedAt: String,
+    @SerialName("blur_hash") val blurHash: String,
     val urls: Urls,
 )

@@ -4,24 +4,27 @@ import al.bruno.un.splash.data.source.remote.service.UnSplashCollectionService
 import al.bruno.un.splash.data.source.remote.service.UnSplashPhotoService
 import al.bruno.un.splash.data.source.remote.service.UnSplashSearchService
 import al.bruno.un.splash.data.source.remote.service.UnSplashUserService
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import javax.inject.Singleton
-
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import javax.inject.Singleton
 
 @Module
 class UnSplashModule {
     @Provides
     @Singleton
-    fun providerRetrofit(): Retrofit {
+    fun providerRetrofit(
+
+    ): Retrofit {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         return Retrofit
             .Builder()
@@ -40,12 +43,11 @@ class UnSplashModule {
                                 .build()
                         )
                     }).build()
-            ).addConverterFactory(
-                GsonConverterFactory
-                .create(
-                    GsonBuilder()
-                        .setDateFormat("yyyy/MM/dd")
-                        .create()))
+            )
+            .addConverterFactory(
+                Json
+                    .asConverterFactory("application/json".toMediaType())
+            )
             .build()
     }
 

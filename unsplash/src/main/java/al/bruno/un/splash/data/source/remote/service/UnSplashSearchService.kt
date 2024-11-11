@@ -1,17 +1,16 @@
 package al.bruno.un.splash.data.source.remote.service
 
-
-import al.bruno.un.splash.model.Orientation
-import al.bruno.un.splash.data.source.model.SearchCollectionsResult
-import al.bruno.un.splash.data.source.model.SearchPhotosResult
-import al.bruno.un.splash.data.source.model.SearchUsersResult
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
-
 /**
  * Search api.
  */
+
+import al.bruno.un.splash.data.source.model.SearchCollectionsResult
+import al.bruno.un.splash.data.source.model.SearchPhotosResult
+import al.bruno.un.splash.data.source.model.SearchUsersResult
+import al.bruno.un.splash.model.Orientation
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface UnSplashSearchService {
     @GET("search/photos")

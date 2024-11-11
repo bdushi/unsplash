@@ -1,6 +1,7 @@
 package al.bruno.un.splash.data.source.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * "id": "pXhwzz1JtQU",
@@ -41,28 +42,44 @@ import com.google.gson.annotations.SerializedName
  * }
  */
 
+@Serializable
 data class User(
     val id: String,
-    val updated_at: String,
+    @SerialName("updated_at")
+    val updatedAt: String,
     val username: String,
     val name: String,
-    @SerializedName("first_name") val firstName: String,
-    @SerializedName("last_name") val lastName: String,
-    @SerializedName("twitter_username") val twitterUsername: String,
-    @SerializedName("portfolio_url") val portfolioUrl: String?,
+    @SerialName("first_name")
+    val firstName: String,
+    @SerialName("last_name")
+    val lastName: String,
+    @SerialName("twitter_username")
+    val twitterUsername: String,
+    @SerialName("portfolio_url")
+    val portfolioUrl: String?,
     val bio: String,
     val location: String,
     val links: Links,
-    @SerializedName("profile_image") val profileImage: ProfileImage,
-    @SerializedName("instagram_username") val instagramUsername: String,
-    @SerializedName("total_collections") val totalCollections: Int,
-    @SerializedName("total_likes") val totalLikes: Int,
-    @SerializedName("total_photos") val totalPhotos: Int,
-    @SerializedName("followed_by_user") val followedByUser: Boolean,
-    @SerializedName("followers_count") val followersCount: Int,
-    @SerializedName("following_count") val followingCount: Int,
-    @SerializedName("accepted_tos") val acceptedTos: Boolean,
-    @SerializedName("for_hire") val forHire: Boolean,
+    @SerialName("profile_image") val
+    profileImage: ProfileImage,
+    @SerialName("instagram_username")
+    val instagramUsername: String,
+    @SerialName("total_collections")
+    val totalCollections: Int,
+    @SerialName("total_likes")
+    val totalLikes: Int,
+    @SerialName("total_photos")
+    val totalPhotos: Int,
+    @SerialName("followed_by_user")
+    val followedByUser: Boolean,
+    @SerialName("followers_count")
+    val followersCount: Int,
+    @SerialName("following_count")
+    val followingCount: Int,
+    @SerialName("accepted_tos")
+    val acceptedTos: Boolean,
+    @SerialName("for_hire")
+    val forHire: Boolean,
     val downloads: Int,
     val badge: Badge?,
     val social: Social

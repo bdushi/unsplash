@@ -1,5 +1,7 @@
 package al.bruno.un.splash.data.source.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * "title": "Kitsuné Café, Montreal, Canada"
  * "name": "Kitsuné Café"
@@ -11,6 +13,7 @@ package al.bruno.un.splash.data.source.model
  * }
  */
 
+@Serializable
 data class Location(
     val title: String,
     val name: String,

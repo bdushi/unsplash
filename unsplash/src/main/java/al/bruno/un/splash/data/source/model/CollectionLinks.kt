@@ -1,5 +1,7 @@
 package al.bruno.un.splash.data.source.model
 
+import kotlinx.serialization.Serializable
+
 /**
  * "self": "https://api.unsplash.com/collections/296",
  * "html": "https://unsplash.com/collections/296",
@@ -7,6 +9,7 @@ package al.bruno.un.splash.data.source.model
  * "related": "https://api.unsplash.com/collections/296/related"
  */
 
+@Serializable
 data class CollectionLinks(
     val self: String,
     val html: String,

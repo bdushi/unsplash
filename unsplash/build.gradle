@@ -1,9 +1,11 @@
 plugins {
     id 'maven-publish'
     id 'org.jetbrains.kotlin.kapt'
-    alias libs.plugins.android.library
-    alias libs.plugins.kotlin.android
+    alias libs.plugins.com.android.library
+    alias libs.plugins.org.jetbrains.kotlin.android
+    alias libs.plugins.org.jetbrains.kotlin.compose.compiler
     alias libs.plugins.google.maps.secrets
+    alias libs.plugins.org.jetbrains.kotlin.serialization
 }
 
 android {
@@ -26,7 +28,13 @@ android {
         }
     }
 
+    composeCompiler {
+        enableStrongSkippingMode = true
+        includeSourceInformation = true
+    }
+
     buildFeatures {
+        compose = true
         buildConfig = true
         viewBinding = true
         dataBinding = true
@@ -59,7 +67,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 // Applies the component for the release build variant.
-                from components.release
+//                from components.release
                 // Publication attributes.
                 groupId 'al.bruno'
                 artifactId 'un-official'
@@ -85,6 +93,14 @@ afterEvaluate {
 }
 
 dependencies {
+    implementation platform(libs.compose.bom)
+    implementation libs.ui.material
+    implementation libs.ui
+    implementation libs.ui.graphics
+    implementation libs.ui.tooling.preview
+    implementation libs.material3
+    implementation libs.material.icons
+
     implementation libs.appcompat
     implementation libs.fragment
     implementation libs.navigation.fragment
@@ -100,8 +116,9 @@ dependencies {
 
     // Retrofit
     api libs.retrofit
-    api libs.converter.gson
+    api libs.converter.kotlinx.serialization
     api libs.logging.interceptor
+    implementation libs.kotlinx.serialization.json
 
     api libs.dagger2
     kapt libs.dagger2.compiler

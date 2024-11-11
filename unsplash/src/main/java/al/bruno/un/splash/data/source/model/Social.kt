@@ -1,6 +1,7 @@
 package al.bruno.un.splash.data.source.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * "instagram_username": "mometrixtestpreparation",
@@ -9,9 +10,14 @@ import com.google.gson.annotations.SerializedName
  * "paypal_email": null
  */
 
+@Serializable
 data class Social(
-    @SerializedName("instagram_username") val instagramUsername: String,
-    @SerializedName("portfolio_url") val portfolioUrl: String,
-    @SerializedName("twitter_username") val twitterUsername: String,
-    @SerializedName("paypal_email") val paypalEmail: String?
+    @SerialName("instagram_username")
+    val instagramUsername: String,
+    @SerialName("portfolio_url")
+    val portfolioUrl: String,
+    @SerialName("twitter_username")
+    val twitterUsername: String,
+    @SerialName("paypal_email")
+    val paypalEmail: String?
 )

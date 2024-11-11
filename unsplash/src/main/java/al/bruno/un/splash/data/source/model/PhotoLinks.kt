@@ -1,6 +1,7 @@
 package al.bruno.un.splash.data.source.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * "self": "https://api.unsplash.com/photos/LBI7cgq3pbM",
@@ -9,9 +10,11 @@ import com.google.gson.annotations.SerializedName
  * "download_location": "https://api.unsplash.com/photos/LBI7cgq3pbM/download"
  */
 
+@Serializable
 data class PhotoLinks(
     val self: String,
     val html: String,
     val download: String,
-    @SerializedName("download_location") val downloadLocation: String
+    @SerialName("download_location")
+    val downloadLocation: String
 )

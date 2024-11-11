@@ -1,6 +1,7 @@
 plugins {
-    alias libs.plugins.android.application
-    alias libs.plugins.kotlin.android
+    alias libs.plugins.com.android.application
+    alias libs.plugins.org.jetbrains.kotlin.android
+    alias libs.plugins.org.jetbrains.kotlin.compose.compiler
     id 'org.jetbrains.kotlin.kapt'
 }
 
@@ -31,8 +32,13 @@ android {
     kotlinOptions {
             jvmTarget = '17'
     }
+    composeCompiler {
+        enableStrongSkippingMode = true
+        includeSourceInformation = true
+    }
 
     buildFeatures {
+        compose = true
         buildConfig = true
         viewBinding = true
         dataBinding = true
@@ -51,6 +57,16 @@ android {
 }
 
 dependencies {
+    implementation platform(libs.compose.bom)
+    implementation libs.ui.material
+    implementation libs.ui
+    implementation libs.ui.graphics
+    implementation libs.ui.tooling.preview
+    implementation libs.material3
+    implementation libs.material.icons
+    implementation libs.navigation
+    implementation libs.navigation.ui
+
     implementation libs.android.core
     implementation libs.appcompat
     implementation libs.google.android.material

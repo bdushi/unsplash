@@ -1,5 +1,8 @@
 package al.bruno.un.splash.data.source.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 /**
  * "make": "Canon",
  * "model": "Canon EOS 40D",
@@ -9,11 +12,14 @@ package al.bruno.un.splash.data.source.model
  * "iso": 100
  */
 
+@Serializable
 data class Exif(
     var make: String,
     var model: String,
-    var exposure_time: String,
+    @SerialName("exposure_time")
+    var exposureTime: String,
     var aperture: String,
-    var focal_length: String,
+    @SerialName("focal_length")
+    var focalLength: String,
     var iso: Int
 )

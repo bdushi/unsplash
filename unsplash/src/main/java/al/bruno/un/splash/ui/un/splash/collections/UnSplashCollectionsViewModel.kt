@@ -9,8 +9,9 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class UnSplashCollectionsViewModel @Inject constructor(private var unSplashCollectionRepository: UnSplashCollectionRepository):
-    BaseViewModel() {
+class UnSplashCollectionsViewModel @Inject constructor(
+    private var unSplashCollectionRepository: UnSplashCollectionRepository
+) : BaseViewModel() {
     fun collectionPagedList(): Flow<PagingData<Collection>> {
         return Pager(
             config = PagingConfig(

@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+
 env:
   UN_SPLASH_API_KEY: ${{ secrets.UN_SPLASH_API_KEY }}
   UN_OFFICIAL_GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
@@ -16,18 +17,17 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
-        java: [ 19 ]
+        os: [ubuntu-latest]
+        java: [17]
 
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-        # Load Api Key from secrets and write to local.properties
+
       - name: Load UnSplash ApiKey from secrets and write to local.properties
         run: echo UN_SPLASH_API_KEY = "$UN_SPLASH_API_KEY" >> ./local.properties
 
@@ -57,12 +57,10 @@ jobs:
         run: ./gradlew build
 
       - name: Build the app
-#        run: ./gradlew assembleRelease --stacktrace
-        run: ./gradlew assemble
+        run: ./gradlew assembleRelease --stacktrace
 
       - name: Sign APK
         uses: r0adkll/sign-android-release@v1
-        # ID used to access action output
         id: sign
         with:
           releaseDirectory: app/build/outputs/apk/release
@@ -71,17 +69,12 @@ jobs:
           keyStorePassword: ${{ env.STORE_PASSWORD }}
           keyPassword: ${{ env.KEY_PASSWORD }}
 
-#      - uses: actions/upload-artifact@v2
-#        with:
-#          name: release.apk
-#          path: ${{steps.sign.outputs.signedReleaseFile}}
-
       - name: Get App version code
         id: version
         run: |
           echo "::set-output name=commits::$(git rev-list --count HEAD)"
 
-      - name: Release
+      - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         with:
@@ -90,32 +83,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.UN_OFFICIAL_GITHUB_TOKEN }}
 
-      - name: Debug Local Properties file
-        run: |
-          cat local.properties
-
-#      - name: Publish package
-#        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
-#        with:
-#          arguments: publish
-#        run: ./gradlew publish
-#        run: ./gradlew :unsplash:publishReleasePublicationToGitHubPackagesRepository
-#        uses:  actions/upload-artifact@v3
-#        with:
-#          arguments: publish
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
+      #      - name: Publish package
+      #        uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+      #        with:
+      #          arguments: publish
+      #        run: ./gradlew publish
+      #        run: ./gradlew :unsplash:publishReleasePublicationToGitHubPackagesRepository
+      #        uses:  actions/upload-artifact@v3
+      #        with:
+      #          arguments: publish
+      #        env:
+      #          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN  }}
 
       - name: Publish AAR to GitHub Packages
-        uses: actions/upload-artifact@v3
-        with:
-          name: unsplash
-          path: unsplash/build/outputs/aar/unsplash-release.aar
         run: ./gradlew publish
-
-#      - name: Publish AAR to GitHub Packages
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.UN_OFFICIAL_GITHUB_TOKEN }}
 
       - name: Upload Release APK
         id: upload_release_asset
@@ -126,4 +107,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.sign.outputs.signedReleaseFile }}
           asset_name: signed-app.apk
-          asset_content_type: application/zip
+          asset_content_type: application/vnd.android.package-archive
